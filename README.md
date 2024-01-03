@@ -22,7 +22,7 @@ Cet arbre a été réalisé sur le site FIGMA:
 [Lien de l'arbre](https://www.figma.com/file/nKBFi9b7gsDLVyzOhAWF3z/Arbre-Heuristique?type=whiteboard&node-id=0%3A1&t=NrrkjkS34Nig52fh-1) 
 
 
-![Arbre Heuristique (2)](https://github.com/laetitiamichel/PROJET_LIGUES_MESLE/blob/developpement/Arbre%20Heuristique.png)
+![Arbre Heuristique (2)]([https://github.com/laetitiamichel/PROJET_LIGUES_MESLE/blob/developpement/Arbre%20Heuristique.png](https://github.com/laetitiamichel/PROJET_LIGUES_MESLE/blob/developpement/MCD_projet_ligues.png))
 
 
 
