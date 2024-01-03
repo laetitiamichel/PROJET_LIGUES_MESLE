@@ -22,7 +22,7 @@ Cet arbre a été réalisé sur le site FIGMA:
 [Lien de l'arbre](https://www.figma.com/file/nKBFi9b7gsDLVyzOhAWF3z/Arbre-Heuristique?type=whiteboard&node-id=0%3A1&t=NrrkjkS34Nig52fh-1) 
 
 
-![Arbre Heuristique (2)]([https://github.com/laetitiamichel/PROJET_LIGUES_MESLE/blob/developpement/Arbre%20Heuristique.png](https://github.com/laetitiamichel/PROJET_LIGUES_MESLE/blob/developpement/MCD_projet_ligues.png))
+![Arbre Heuristique (3)](https://hackmd.io/_uploads/SyE2VJmup.png)
 
 
 
@@ -44,4 +44,5 @@ POSSEDER, 11 EMPLOYÉ , 11 GESTION PERSONNEL
 GESTION PERSONNEL: id_employe, root
 ```
 
-![MCD_projet_ligues](https://hackmd.io/_uploads/HyAbRAfup.png)
+![MCD_projet_ligues](https://hackmd.io/_uploads/B1T2Ny7d6.png)
+
