@@ -45,4 +45,73 @@ GESTION PERSONNEL: id_employe, root
 ```
 
 ![MCD_projet_ligues](https://hackmd.io/_uploads/B1T2Ny7d6.png)
+# MCD DATES :
 
+![MCD_dates](https://hackmd.io/_uploads/SyKa2lEda.png)
+
+```
+COMPOSER, 11 LIGUE, 0N  EMPLOYÉ
+LIGUE: id_ligue, nom 
+ADMINISTRER, 11 GESTION PERSONNEL, 11 LIGUE
+
+EMPLOYE: id_employe, nom, prenom, mail, password, dateArrivee, dateDepart
+POSSEDER, 11 EMPLOYÉ , 11 GESTION PERSONNEL
+GESTION PERSONNEL: id_employe, root
+```
+
+
+---
+
+```
+private static final long serialVersionUID = 4795721718037994734L;
+	private String nom, prenom, password, mail;
+    private LocalDate dateArrivee, dateDepart;
+	private Ligue ligue;
+	private GestionPersonnel gestionPersonnel;
+	
+	Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom, String mail, String password, LocalDate dateArrivee, LocalDate dateDepart)
+	{
+		this.gestionPersonnel = gestionPersonnel;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.password = password;
+		this.mail = mail;
+		this.ligue = ligue;
+        this.dateArrivee = dateArrivee;
+        this.dateDepart = dateDepart;
+	}
+    
+    public LocalDate getDateArrivee()
+	{
+		return dateArrivee;
+	}
+    
+	public void setDateArrivee(LocalDate dateArrivee)
+	{
+		this.dateArrivee = dateArrivee;
+	}
+    
+    
+      public LocalDate getDateDepart()
+	{
+		return dateDepart;
+	}
+	
+
+	public void setDateDepart(LocalDate dateDepart)
+	{
+    
+		this.dateDepart = dateDepart;
+	}
+    
+    
+    public boolean datesIncoherantes( LocalDate dateArrivee, LocalDate DateDepart)
+	{
+		if ( this.dateArrivee >= this.dateDepart )
+		{
+			return false ;
+		}
+		else
+			throw new ImpossibleDeSupprimerRoot();
+	}
+```
