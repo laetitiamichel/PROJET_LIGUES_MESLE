@@ -178,7 +178,7 @@ public class Employe implements Serializable, Comparable<Employe>
 /* execptions : */
 /* si l'user entre une date d'arrivée supérieure à une date de départ : */
 
-    public boolean datesIncoherantes( LocalDate dateArrivee, LocalDate DateDepart)
+    /*public boolean datesIncoherantes( LocalDate dateArrivee, LocalDate DateDepart)
 	{
 		if ( this.dateArrivee >= this.dateDepart )
 		{
@@ -186,7 +186,7 @@ public class Employe implements Serializable, Comparable<Employe>
 		}
 		else
 			throw System.out.println(" La date d'arrivée doit être antérieure à la date de départ.");
-	}
+	}*/
     /**
 	 * Supprime l'employé. Si celui-ci est un administrateur, le root
 	 * récupère les droits d'administration sur sa ligue.
