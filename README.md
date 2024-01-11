@@ -47,14 +47,13 @@ EMPLOYE: id_employe, nom, prenom, mail, password,ligue
 
 # MCD DATES :
 
-![MCD](https://hackmd.io/_uploads/rJkjTpauT.png)
+![mcd](https://hackmd.io/_uploads/Bk6P6Cpua.png)
 
 
-```
-COMPOSER, 0N LIGUE, 01 EMPLOYÉ: super-admin
+```COMPOSER, 1N LIGUE, 11 EMPLOYÉ: super-admin
 LIGUE: id_ligue, nom 
 
-EMPLOYE: id_employe, nom, prenom, mail, password,ligue, dateArrivee,dateDepart
+EMPLOYE: id_employe, nom, prenom, mail, password, dateArrivee,dateDepart
 
 ```
 
