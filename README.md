@@ -35,13 +35,10 @@ En utilisant les données s'affichant en ligne de commande ainsi que le code de 
 Ici le MCD a été réalisé sur le logiciel MOKODO:
 
 ```
-COMPOSER, 11 LIGUE, 0N  EMPLOYÉ
+COMPOSER, 0N LIGUE, 01 EMPLOYÉ
 LIGUE: id_ligue, nom 
-ADMINISTRER, 11 GESTION PERSONNEL, 11 LIGUE
 
-EMPLOYE: id_employe, nom, prenom, mail, password
-POSSEDER, 11 EMPLOYÉ , 11 GESTION PERSONNEL
-GESTION PERSONNEL: id_employe, root
+EMPLOYE: id_employe, nom, prenom, mail, password,ligue
 ```
 
 
