@@ -14,7 +14,7 @@ public class JDBC implements Passerelle
 	Connection connection;
 
 	public JDBC()
-	{ //lalala
+	{
 		try
 		{
 			Class.forName(Credentials.getDriverClassName());
