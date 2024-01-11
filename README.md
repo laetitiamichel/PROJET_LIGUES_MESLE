@@ -45,6 +45,7 @@ GESTION PERSONNEL: id_employe, root
 ```
 
 ![MCD_projet_ligues](https://hackmd.io/_uploads/B1T2Ny7d6.png)
+
 # MCD DATES :
 
 ![MCD_dates](https://hackmd.io/_uploads/SyKa2lEda.png)
@@ -61,13 +62,13 @@ GESTION PERSONNEL: id_employe, root
 
 
 ---
-# AJOUT DES VARIABLES LOCALDATES:
+
 ```
 private static final long serialVersionUID = 4795721718037994734L;
 	private String nom, prenom, password, mail;
+    private LocalDate dateArrivee, dateDepart;
 	private Ligue ligue;
 	private GestionPersonnel gestionPersonnel;
-	private LocalDate dateArrivee, dateDepart;
 	
 	Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom, String mail, String password, LocalDate dateArrivee, LocalDate dateDepart)
 	{
@@ -77,8 +78,8 @@ private static final long serialVersionUID = 4795721718037994734L;
 		this.password = password;
 		this.mail = mail;
 		this.ligue = ligue;
-        	this.dateArrivee = dateArrivee;
-        	this.dateDepart = dateDepart;
+        this.dateArrivee = dateArrivee;
+        this.dateDepart = dateDepart;
 	}
     
     public LocalDate getDateArrivee()
@@ -86,7 +87,7 @@ private static final long serialVersionUID = 4795721718037994734L;
 		return dateArrivee;
 	}
     
-	public void setDateArrivee()
+	public void setDateArrivee(LocalDate dateArrivee)
 	{
 		this.dateArrivee = dateArrivee;
 	}
@@ -98,16 +99,13 @@ private static final long serialVersionUID = 4795721718037994734L;
 	}
 	
 
-	public void setDateDepart()
+	public void setDateDepart(LocalDate dateDepart)
 	{
     
 		this.dateDepart = dateDepart;
 	}
     
-
-/* execptions : */
-/* si l'user entre une date d'arrivée supérieure à une date de départ : */
-
+    
     public boolean datesIncoherantes( LocalDate dateArrivee, LocalDate DateDepart)
 	{
 		if ( this.dateArrivee >= this.dateDepart )
@@ -115,6 +113,6 @@ private static final long serialVersionUID = 4795721718037994734L;
 			return false ;
 		}
 		else
-			throw System.out.println(" La date d'arrivée doit être antérieure à la date de départ.");
+			throw new ImpossibleDeSupprimerRoot();
 	}
 ```
