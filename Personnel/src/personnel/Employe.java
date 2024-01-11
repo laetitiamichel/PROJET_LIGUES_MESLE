@@ -17,7 +17,7 @@ public class Employe implements Serializable, Comparable<Employe>
 	private String nom, prenom, password, mail;
 	private Ligue ligue;
 	private GestionPersonnel gestionPersonnel;
-	//private LocalDate dateArrivee, dateDepart;
+	private LocalDate dateArrivee, dateDepart;
 	//, String mail, String password, LocalDate dateArrivee, LocalDate dateDepart
 	
 	Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom)
