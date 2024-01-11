@@ -34,19 +34,6 @@ En utilisant les données s'affichant en ligne de commande ainsi que le code de 
 
 Ici le MCD a été réalisé sur le logiciel MOKODO:
 
-```
-COMPOSER, 0N LIGUE, 01 EMPLOYÉ
-LIGUE: id_ligue, nom 
-
-EMPLOYE: id_employe, nom, prenom, mail, password,ligue
-```
-
-
-![MCD_1_LIGUES](https://hackmd.io/_uploads/S1KMdqT_p.png)
-
-
-# MCD DATES :
-
 ![mcd](https://hackmd.io/_uploads/Bk6P6Cpua.png)
 
 
