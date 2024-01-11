@@ -17,6 +17,7 @@ public class Employe implements Serializable, Comparable<Employe>
 	private String nom, prenom, password, mail;
 	private Ligue ligue;
 	private GestionPersonnel gestionPersonnel;
+	// insertion variables localDate:
 	private LocalDate dateArrivee, dateDepart;
 	
 	
