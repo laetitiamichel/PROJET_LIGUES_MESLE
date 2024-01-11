@@ -149,11 +149,48 @@ public class Employe implements Serializable, Comparable<Employe>
 		return ligue;
 	}
 
-	/**
+	
+	
+	public LocalDate getDateArrivee()
+	{
+		return dateArrivee;
+	}
+    
+	public void setDateArrivee()
+	{
+		this.dateArrivee = dateArrivee;
+	}
+    
+    
+      public LocalDate getDateDepart()
+	{
+		return dateDepart;
+	}
+	
+
+	public void setDateDepart()
+	{
+    
+		this.dateDepart = dateDepart;
+	}
+    
+
+/* execptions : */
+/* si l'user entre une date d'arrivée supérieure à une date de départ : */
+
+    public boolean datesIncoherantes( LocalDate dateArrivee, LocalDate DateDepart)
+	{
+		if ( this.dateArrivee >= this.dateDepart )
+		{
+			return false ;
+		}
+		else
+			throw System.out.println(" La date d'arrivée doit être antérieure à la date de départ.");
+	}
+    /**
 	 * Supprime l'employé. Si celui-ci est un administrateur, le root
 	 * récupère les droits d'administration sur sa ligue.
 	 */
-	
 	public void remove()
 	{
 		Employe root = gestionPersonnel.getRoot();
