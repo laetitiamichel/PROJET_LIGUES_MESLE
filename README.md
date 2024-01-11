@@ -44,24 +44,22 @@ POSSEDER, 11 EMPLOYÉ , 11 GESTION PERSONNEL
 GESTION PERSONNEL: id_employe, root
 ```
 
-![MCD_projet_ligues](https://hackmd.io/_uploads/B1T2Ny7d6.png)
+
+![MCD_1_LIGUES](https://hackmd.io/_uploads/S1KMdqT_p.png)
+
 
 # MCD DATES :
 
-![MCD_dates](https://hackmd.io/_uploads/SyKa2lEda.png)
+![MCD_2_DATES](https://hackmd.io/_uploads/Sy4mO5pup.png)
+
 
 ```
-COMPOSER, 11 LIGUE, 0N  EMPLOYÉ
+COMPOSER, 0N LIGUE, 01 EMPLOYÉ
 LIGUE: id_ligue, nom 
-ADMINISTRER, 11 GESTION PERSONNEL, 11 LIGUE
 
-EMPLOYE: id_employe, nom, prenom, mail, password, dateArrivee, dateDepart
-POSSEDER, 11 EMPLOYÉ , 11 GESTION PERSONNEL
-GESTION PERSONNEL: id_employe, root
+EMPLOYE: id_employe, nom, prenom, mail, password,ligue, dateArrivee,dateDepart
+
 ```
-
-
----
 
 ```
 private static final long serialVersionUID = 4795721718037994734L;
