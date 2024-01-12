@@ -38,7 +38,7 @@ Ici le MCD a été réalisé sur le logiciel MOKODO:
 
 
 ```
-COMPOSER, 0N LIGUE, 01 EMPLOYE
+APPARTENIR, 0N LIGUE, 01 EMPLOYE
 LIGUE: id_ligue, nom 
 
 EMPLOYE: id_employe, nom, prenom, mail, password, dateArrivee,dateDepart
