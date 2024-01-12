@@ -9,6 +9,7 @@ import java.time.LocalDate;
  * Un seul employé, rattaché à aucune ligue, est le root.
  * Il est impossible d'instancier directement un employé, 
  * il faut passer la méthode {@link Ligue#addEmploye addEmploye}.
+ * TEST
  */
 
 public class Employe implements Serializable, Comparable<Employe>
@@ -150,7 +151,7 @@ public class Employe implements Serializable, Comparable<Employe>
 		return ligue;
 	}
 
-	
+	/*retourne la date d'arrivée de l'employé dans la ligue */
 	
 	public LocalDate getDateArrivee()
 	{
@@ -162,7 +163,7 @@ public class Employe implements Serializable, Comparable<Employe>
 		this.dateArrivee = dateArrivee;
 	}
     
-    
+	/*retourne la date de départ de l'employé dans la ligue */
       public LocalDate getDateDepart()
 	{
 		return dateDepart;
