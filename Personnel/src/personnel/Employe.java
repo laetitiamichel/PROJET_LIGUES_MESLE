@@ -187,6 +187,7 @@ public class Employe implements Serializable, Comparable<Employe>
 		else
 			throw System.out.println(" La date d'arrivée doit être antérieure à la date de départ.");
 	}*/
+	
     /**
 	 * Supprime l'employé. Si celui-ci est un administrateur, le root
 	 * récupère les droits d'administration sur sa ligue.

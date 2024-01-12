@@ -1,7 +1,9 @@
 package personnel;
 
 import java.io.Serializable;
-//import java.time.LocalDate;
+import java.util.Collections;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
  * Gestion du personnel. Un seul objet de cette classe existe.
