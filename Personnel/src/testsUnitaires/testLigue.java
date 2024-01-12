@@ -20,7 +20,11 @@ class testLigue
 	void addEmploye() throws SauvegardeImpossible
 	{
 		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
+<<<<<<< HEAD
 		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",null,null); 
+=======
+		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty", null, null); 
+>>>>>>> d4019718428d6aef17cb4f668a6aca015e473c95
 		assertEquals(employe, ligue.getEmployes().first());
 	}
 }
