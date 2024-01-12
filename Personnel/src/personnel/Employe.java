@@ -152,24 +152,22 @@ public class Employe implements Serializable, Comparable<Employe>
 	}
 
 	/*retourne la date d'arrivée de l'employé dans la ligue */
-	
 	public LocalDate getDateArrivee()
 	{
 		return dateArrivee;
 	}
-    
+    /* modifie la date d'arrivée de l'employé dans la ligue */
 	public void setDateArrivee()
 	{
 		this.dateArrivee = dateArrivee;
 	}
     
-	/*retourne la date de départ de l'employé dans la ligue */
+	/*retourne la date de départ de l'employé dans la ligue tesy */
       public LocalDate getDateDepart()
 	{
 		return dateDepart;
 	}
-	
-
+     /* modifie la date de départ de l'employé dans la ligue */
 	public void setDateDepart()
 	{
     
