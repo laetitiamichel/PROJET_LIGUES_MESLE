@@ -187,12 +187,12 @@ public class Employe implements Serializable, Comparable<Employe>
 		else
 			throw System.out.println(" La date d'arrivée doit être antérieure à la date de départ.");
 	}*/
-	/*public boolean datesIncoherantes(LocalDate dateArrivee, LocalDate dateDepart) throws IllegalArgumentException {
+	public boolean datesIncoherantes(LocalDate dateArrivee, LocalDate dateDepart) throws IllegalArgumentException {
 	    if (dateArrivee.isAfter(dateDepart)) {
 	        throw new IllegalArgumentException("La date d'arrivée doit être antérieure à la date de départ.");
 	    }
 	    return true;
-	}*/
+	}
 	
     /**
 	 * Supprime l'employé. Si celui-ci est un administrateur, le root
