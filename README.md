@@ -14,6 +14,9 @@ Les niveaux d’habilitation des utilisateurs sont les suivants :
 L’application doit être rendue multi-utilisateurs grace à l’utilisation d’une base de données.
 
 Les trois niveaux d’habilitation ci-dessus doivent être mis en place.
+
+![appli_3_tiers](https://hackmd.io/_uploads/Hkz1mRwFa.png)
+
 # ARBRE HEURISTIQUE:
 
 L'objectif de cet arbre est de représenter chaque menu et chaque option par un noeud.
@@ -34,67 +37,16 @@ En utilisant les données s'affichant en ligne de commande ainsi que le code de 
 
 Ici le MCD a été réalisé sur le logiciel MOKODO:
 
-![MCD_final](https://hackmd.io/_uploads/BJO3nR0Op.png)
+![MCD](https://hackmd.io/_uploads/rJ0xE0wKp.png)
+
+
+
 
 
 ```
-COMPOSER, 0N LIGUE, 01 EMPLOYE : admin
+COMPOSER, 1N LIGUE, 11 EMPLOYE : admin
 LIGUE: id_ligue, nom 
 
 EMPLOYE: id_employe, nom, prenom, mail, password, dateArrivee,dateDepart, root
 
-```
-
-```
-private static final long serialVersionUID = 4795721718037994734L;
-	private String nom, prenom, password, mail;
-    private LocalDate dateArrivee, dateDepart;
-	private Ligue ligue;
-	private GestionPersonnel gestionPersonnel;
-	
-	Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom, String mail, String password, LocalDate dateArrivee, LocalDate dateDepart)
-	{
-		this.gestionPersonnel = gestionPersonnel;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.password = password;
-		this.mail = mail;
-		this.ligue = ligue;
-        this.dateArrivee = dateArrivee;
-        this.dateDepart = dateDepart;
-	}
-    
-    public LocalDate getDateArrivee()
-	{
-		return dateArrivee;
-	}
-    
-	public void setDateArrivee(LocalDate dateArrivee)
-	{
-		this.dateArrivee = dateArrivee;
-	}
-    
-    
-      public LocalDate getDateDepart()
-	{
-		return dateDepart;
-	}
-	
-
-	public void setDateDepart(LocalDate dateDepart)
-	{
-    
-		this.dateDepart = dateDepart;
-	}
-    
-    
-    public boolean datesIncoherantes( LocalDate dateArrivee, LocalDate DateDepart)
-	{
-		if ( this.dateArrivee >= this.dateDepart )
-		{
-			return false ;
-		}
-		else
-			throw new ImpossibleDeSupprimerRoot();
-	}
 ```
