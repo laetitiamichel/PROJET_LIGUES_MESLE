@@ -23,7 +23,7 @@ public class Employe implements Serializable, Comparable<Employe>
 	
 	
 	/* ici rajout de public pour pouvoir faire le test dans testligue */
-	Employe(GestionPersonnel gestionPersonnel, String ligue, String nom, String prenom, String mail, String password, LocalDate dateArrivee, LocalDate dateDepart)
+	Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom, String mail, String password, LocalDate dateArrivee, LocalDate dateDepart)
 	{
 		this.gestionPersonnel = gestionPersonnel;
 		this.ligue = ligue;
@@ -166,11 +166,17 @@ public class Employe implements Serializable, Comparable<Employe>
 	}
     /* modifie la date d'arrivée de l'employé dans la ligue */
 	public void setDateArrivee()
-	{if (this.dateArrivee = dateArrivee;)
-	else
-		throw new erreursDates();
+	{
+		this.dateArrivee = dateArrivee;
 		
+		if (dateArrivee.isAfter(dateDepart)) 
+		{
+	        throw new IllegalArgumentException("La date d'arrivée doit être antérieure à la date de départ.");
+	    }
+	    return true;
 	}
+
+
     
 	/* GET DATE DEPART */
 	/*retourne la date de départ de l'employé dans la ligue tesy */
@@ -178,16 +184,35 @@ public class Employe implements Serializable, Comparable<Employe>
 	{
 		return dateDepart;
 	}
+      
      /* modifie la date de départ de l'employé dans la ligue */
+      
 	public void setDateDepart()
 	{
-    if(this.dateDepart = dateDepart;)
-    else
-    	throw new erreursDates();
+		this.dateDepart = dateDepart;
+		if (dateDepart.isAfter(dateDepart)) 
+		{
+	        throw new IllegalArgumentException("La date de départ doit être postérieure à la date d'arrivée.");
+	    }
+	    return true;
+		
 	}
     
 
 
+	/* execeptions : */
+	/* si l'user entre une date d'arrivée supérieure à une date de départ : */
+
+	   /* public boolean datesIncoherantes( LocalDate dateArrivee, LocalDate DateDepart)
+		{
+			if ( this.dateArrivee>=this.dateDepart )
+			{
+				return false ;
+			}
+			else
+				throw System.out.println(" La date d'arrivée doit être antérieure à la date de départ.");
+		}*/
+	
 	
     /**
 	 * Supprime l'employé. Si celui-ci est un administrateur, le root
