@@ -39,7 +39,7 @@ class testLigue
 	   }
 	 
 	 @Test 
-	 public void getPrenom() 
+	 public void getPrenom() throws SauvegardeImpossible 
 	 {
 		 	Ligue ligue = gestionPersonnel.addLigue("Fléchettes");// création d'une ligue   
 		 	
@@ -51,7 +51,7 @@ class testLigue
 	   }
 	 
 	 @Test 
-	 public void getMail() 
+	 public void getMail() throws SauvegardeImpossible 
 	 {
 
 		 	Ligue ligue = gestionPersonnel.addLigue("Fléchettes");// création d'une ligue   
@@ -64,7 +64,7 @@ class testLigue
 	   }
 	 
 	 @Test 
-	 public void getDateArrivee() 
+	 public void getDateArrivee() throws SauvegardeImpossible 
 	 {
 		 	Ligue ligue = gestionPersonnel.addLigue("Fléchettes");// création d'une ligue   
 		 	
@@ -76,7 +76,7 @@ class testLigue
 	   }
 	 
 	 @Test 
-	 public void getDateArrivee() 
+	 public void getDateArrivee() throws SauvegardeImpossible 
 	 {
 		 Ligue ligue = gestionPersonnel.addLigue("Fléchettes");// création d'une ligue   
 		 	
