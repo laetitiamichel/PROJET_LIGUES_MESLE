@@ -47,7 +47,7 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	 * Retourne le nom de la ligue.
 	 * @return le nom de la ligue.
 	 */
-
+	/* GET nom ligue */
 	public String getNom()
 	{
 		return nom;

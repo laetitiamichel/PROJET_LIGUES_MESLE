@@ -16,20 +16,21 @@ public class Employe implements Serializable, Comparable<Employe>
 {
 	private static final long serialVersionUID = 4795721718037994734L;
 	private String nom, prenom, password, mail;
-	private Ligue ligue;
+	private String ligue; // modif ici de ligue en string idem dans les paramètres du construteur
 	private GestionPersonnel gestionPersonnel;
 	// insertion variables localDate:
 	private LocalDate dateArrivee, dateDepart;
 	
 	
-	Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom, String mail, String password, LocalDate dateArrivee, LocalDate dateDepart)
+	/* ici rajout de public pour pouvoir faire le test dans testligue */
+	public Employe(GestionPersonnel gestionPersonnel, String ligue, String nom, String prenom, String mail, String password, LocalDate dateArrivee, LocalDate dateDepart)
 	{
 		this.gestionPersonnel = gestionPersonnel;
+		this.ligue = ligue;
 		this.nom = nom;
 		this.prenom = prenom;
-		this.password = password;
 		this.mail = mail;
-		this.ligue = ligue;
+		this.password = password;
 		this.dateArrivee = dateArrivee;
 		this.dateDepart = dateDepart;
 	}
@@ -43,6 +44,7 @@ public class Employe implements Serializable, Comparable<Employe>
 	 * est l'admininstrateur.
 	 */
 	
+	/*GET ADMIN */
 	public boolean estAdmin(Ligue ligue)
 	{
 		return ligue.getAdministrateur() == this;
@@ -53,6 +55,7 @@ public class Employe implements Serializable, Comparable<Employe>
 	 * @return vrai ssi l'employé est le root.
 	 */
 	
+	/*GET ROOT*/
 	public boolean estRoot()
 	{
 		return gestionPersonnel.getRoot() == this;
@@ -63,6 +66,7 @@ public class Employe implements Serializable, Comparable<Employe>
 	 * @return le nom de l'employé. 
 	 */
 	
+	/* GET NOM*/
 	public String getNom()
 	{
 		return nom;
@@ -83,6 +87,7 @@ public class Employe implements Serializable, Comparable<Employe>
 	 * @return le prénom de l'employé.
 	 */
 	
+	/* GET PRENOM */
 	public String getPrenom()
 	{
 		return prenom;
@@ -103,6 +108,7 @@ public class Employe implements Serializable, Comparable<Employe>
 	 * @return le mail de l'employé.
 	 */
 	
+	/* GET MAIL */
 	public String getMail()
 	{
 		return mail;
@@ -146,11 +152,13 @@ public class Employe implements Serializable, Comparable<Employe>
 	 * @return la ligue à laquelle l'employé est affecté.
 	 */
 	
+	/* GET LIGUE */
 	public Ligue getLigue()
 	{
 		return ligue;
 	}
-
+	
+	/* GET DATE ARRIVEE */
 	/*retourne la date d'arrivée de l'employé dans la ligue */
 	public LocalDate getDateArrivee()
 	{
@@ -158,10 +166,13 @@ public class Employe implements Serializable, Comparable<Employe>
 	}
     /* modifie la date d'arrivée de l'employé dans la ligue */
 	public void setDateArrivee()
-	{
-		this.dateArrivee = dateArrivee;
+	{if (this.dateArrivee = dateArrivee;)
+	else
+		throw new erreursDates();
+		
 	}
     
+	/* GET DATE DEPART */
 	/*retourne la date de départ de l'employé dans la ligue tesy */
       public LocalDate getDateDepart()
 	{
@@ -170,29 +181,13 @@ public class Employe implements Serializable, Comparable<Employe>
      /* modifie la date de départ de l'employé dans la ligue */
 	public void setDateDepart()
 	{
-    
-		this.dateDepart = dateDepart;
+    if(this.dateDepart = dateDepart;)
+    else
+    	throw new erreursDates();
 	}
     
 
-/* execeptions : */
-/* si l'user entre une date d'arrivée supérieure à une date de départ : */
 
-   /* public boolean datesIncoherantes( LocalDate dateArrivee, LocalDate DateDepart)
-	{
-		if ( this.dateArrivee>=this.dateDepart )
-		{
-			return false ;
-		}
-		else
-			throw System.out.println(" La date d'arrivée doit être antérieure à la date de départ.");
-	}*/
-	public boolean datesIncoherantes(LocalDate dateArrivee, LocalDate dateDepart) throws IllegalArgumentException {
-	    if (dateArrivee.isAfter(dateDepart)) {
-	        throw new IllegalArgumentException("La date d'arrivée doit être antérieure à la date de départ.");
-	    }
-	    return true;
-	}
 	
     /**
 	 * Supprime l'employé. Si celui-ci est un administrateur, le root
