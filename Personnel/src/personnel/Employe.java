@@ -16,14 +16,14 @@ public class Employe implements Serializable, Comparable<Employe>
 {
 	private static final long serialVersionUID = 4795721718037994734L;
 	private String nom, prenom, password, mail;
-	private String ligue; // modif ici de ligue en string idem dans les paramètres du construteur
+	private Ligue ligue; 
 	private GestionPersonnel gestionPersonnel;
 	// insertion variables localDate:
 	private LocalDate dateArrivee, dateDepart;
 	
 	
 	/* ici rajout de public pour pouvoir faire le test dans testligue */
-	public Employe(GestionPersonnel gestionPersonnel, String ligue, String nom, String prenom, String mail, String password, LocalDate dateArrivee, LocalDate dateDepart)
+	Employe(GestionPersonnel gestionPersonnel, String ligue, String nom, String prenom, String mail, String password, LocalDate dateArrivee, LocalDate dateDepart)
 	{
 		this.gestionPersonnel = gestionPersonnel;
 		this.ligue = ligue;

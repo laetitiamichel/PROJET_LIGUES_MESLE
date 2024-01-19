@@ -21,16 +21,18 @@ class testLigue
 	{
 		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
 
-		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty", null, null,null); 
+		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty", null, null); 
 
 		assertEquals(employe, ligue.getEmployes().first());
 	}
 	
 	 @Test 
-	 public void getNom() 
+	 public void getNom() throws SauvegardeImpossible 
 	 {
+			Ligue ligue = gestionPersonnel.addLigue("Fléchettes");// création d'une ligue
+
 	        // Créer une instance de la classe à tester
-		 	Employe employe = new Employe(gestionPersonnel,"Fléchettes", "Michel", null, null, null, null,null);
+		 	Employe employe = ligue.addEmploye("Michel", null, null, null, null,null);
 
 	        // Appeler le getter et vérifier si la valeur renvoyée est correcte
 	        assertEquals("Michel", employe.getNom());
@@ -39,8 +41,10 @@ class testLigue
 	 @Test 
 	 public void getPrenom() 
 	 {
-	        // Créer une instance de la classe à tester
-		 	Employe employe = new Employe(gestionPersonnel,"Fléchettes", "Michel", "Laetitia", null, null, null,null);
+		 	Ligue ligue = gestionPersonnel.addLigue("Fléchettes");// création d'une ligue   
+		 	
+		 	// Créer une instance de la classe à tester
+		 	Employe employe = ligue.addEmploye(null,"Laetitia", null, null, null,null);
 
 	        // Appeler le getter et vérifier si la valeur renvoyée est correcte
 	        assertEquals("Laetitia", employe.getPrenom());
@@ -49,9 +53,12 @@ class testLigue
 	 @Test 
 	 public void getMail() 
 	 {
-	        // Créer une instance de la classe à tester
-		 	Employe employe = new Employe(gestionPersonnel,"Fléchettes", "Michel", "Laetitia", "lm@gmail.com", null, null, null);
 
+		 	Ligue ligue = gestionPersonnel.addLigue("Fléchettes");// création d'une ligue   
+		 	
+		 	// Créer une instance de la classe à tester
+		 	Employe employe = ligue.addEmploye(null, null, "lm@gmail.com", null, null,null);
+	       
 	        // Appeler le getter et vérifier si la valeur renvoyée est correcte
 	        assertEquals("lm@gmail.com", employe.getMail());
 	   }
@@ -59,9 +66,11 @@ class testLigue
 	 @Test 
 	 public void getDateArrivee() 
 	 {
-	        // Créer une instance de la classe à tester
-		 	Employe employe = new Employe(gestionPersonnel,"Fléchettes", "Michel", "Laetitia", "lm@gmail.com", "01/01/2001", null, null);
-
+		 	Ligue ligue = gestionPersonnel.addLigue("Fléchettes");// création d'une ligue   
+		 	
+		 	// Créer une instance de la classe à tester
+		 	Employe employe = ligue.addEmploye(null, null,null, "01/01/2001", null);
+		 	
 	        // Appeler le getter et vérifier si la valeur renvoyée est correcte
 	        assertEquals("01/01/2001", employe.getDateArrivee());
 	   }
@@ -69,8 +78,10 @@ class testLigue
 	 @Test 
 	 public void getDateArrivee() 
 	 {
-	        // Créer une instance de la classe à tester
-		 	Employe employe = new Employe(gestionPersonnel,"Fléchettes", "Michel", "Laetitia", "lm@gmail.com", "01/01/2001","01/01/2011");
+		 Ligue ligue = gestionPersonnel.addLigue("Fléchettes");// création d'une ligue   
+		 	
+		 	// Créer une instance de la classe à tester
+		 	Employe employe = ligue.addEmploye(null, null,null, null, "01/01/2011");
 
 	        // Appeler le getter et vérifier si la valeur renvoyée est correcte
 	        assertEquals("01/01/2011", employe.getDateArrivee());
