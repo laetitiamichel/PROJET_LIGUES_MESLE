@@ -173,7 +173,7 @@ public class Employe implements Serializable, Comparable<Employe>
 		{
 	        throw new IllegalArgumentException("La date d'arrivée doit être antérieure à la date de départ.");
 	    }
-	    return true;
+	   
 	}
 
 
@@ -194,7 +194,7 @@ public class Employe implements Serializable, Comparable<Employe>
 		{
 	        throw new IllegalArgumentException("La date de départ doit être postérieure à la date d'arrivée.");
 	    }
-	    return true;
+	  
 		
 	}
     
