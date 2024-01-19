@@ -15,7 +15,7 @@ L’application doit être rendue multi-utilisateurs grace à l’utilisation d�
 
 Les trois niveaux d’habilitation ci-dessus doivent être mis en place.
 
-![application_3_tiers](https://hackmd.io/_uploads/SyoUMCwFa.png)
+![appli_3_tiers](https://hackmd.io/_uploads/Hkz1mRwFa.png)
 
 # ARBRE HEURISTIQUE:
 
