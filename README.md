@@ -37,16 +37,16 @@ En utilisant les données s'affichant en ligne de commande ainsi que le code de 
 
 Ici le MCD a été réalisé sur le logiciel MOKODO:
 
+![MCD](https://hackmd.io/_uploads/rJ0xE0wKp.png)
 
-![MCD_fini](https://hackmd.io/_uploads/HySwfCDKa.png)
 
 
 
 
 ```
-COMPOSER, 0N LIGUE, 01 EMPLOYE
+COMPOSER, 1N LIGUE, 11 EMPLOYE : admin
 LIGUE: id_ligue, nom 
 
-EMPLOYE: id_employe, nom, prenom, mail, password, dateArrivee,dateDepart
+EMPLOYE: id_employe, nom, prenom, mail, password, dateArrivee,dateDepart, root
 
 ```
