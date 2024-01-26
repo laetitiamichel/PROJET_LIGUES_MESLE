@@ -33,6 +33,7 @@ class testLigue
 	// test SET EMPLOYE
 	// A FAIRE THEO
 	
+	// TEST SUPRESSION EMPLOYE
 	//test GETLIGUE
 	@Test 
 	 public void getLigues() throws SauvegardeImpossible 
@@ -51,7 +52,7 @@ class testLigue
 		//ligue.administrateur.getLigue() = "nouveauNom";
 		assertEquals("nouveauNom", ligue.administrateur.getLigue());
 	}
-	// TEST SUPRESSION EMPLOYE
+
 	
 	// TEST SUPPRESSION LIGUE
 	
