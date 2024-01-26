@@ -12,13 +12,7 @@ class testLigue
 {
 	GestionPersonnel gestionPersonnel = GestionPersonnel.getGestionPersonnel();
 	
-	//TEST CREATION LIGUE
-	@Test
-	void createLigue() throws SauvegardeImpossible
-	{
-		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
-		assertEquals("Fléchettes", ligue.getNom());
-	}
+	
 
 	// test GET EMPLOYE
 	@Test
@@ -30,10 +24,24 @@ class testLigue
 
 		assertEquals(employe, ligue.getEmployes().first());
 	}
+	
 	// test SET EMPLOYE
 	// A FAIRE THEO
 	
 	// TEST SUPRESSION EMPLOYE
+	@test
+	public void remove() throws SauvegardeImpossible 
+	{
+		
+	}
+	
+	//TEST CREATION LIGUE
+		@Test
+		void createLigue() throws SauvegardeImpossible
+		{
+			Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
+			assertEquals("Fléchettes", ligue.getNom());
+		}
 	//test GETLIGUE
 	@Test 
 	 public void getLigues() throws SauvegardeImpossible 
