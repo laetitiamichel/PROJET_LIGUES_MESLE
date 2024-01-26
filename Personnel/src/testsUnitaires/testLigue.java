@@ -26,7 +26,16 @@ class testLigue
 	}
 	
 	// test SET EMPLOYE
-	// A FAIRE THEO
+	
+	@Test 
+	public void setEmploye() throws SauvegardeImpossible
+	{
+		
+		Ligue ligue = gestionPersonnel.addLigue(-1,"Fléchettes"); // création d'une ligue
+		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty", null, null); // création employé
+		employe.setNom("Franck"); // changement de nom avec méthode set
+		assertEquals("Franck", ligue.getNom()); // vérif si le nom est changé
+	}
 	
 	// TEST SUPRESSION EMPLOYE
 	@Test
