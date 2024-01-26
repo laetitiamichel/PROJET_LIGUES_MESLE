@@ -96,13 +96,30 @@ class testLigue
 	public void estAdmin() throws SauvegardeImpossible 
 	{
 		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
-		Employe employe = ligue.addEmploye("Michel", "L", null, null, null,null);
-		assertTrue(employe.estAdmin(ligue)); // vérif si la ligue est vide
-		
-		
+		Employe Michel = ligue.addEmploye("Michel", "L", null, null, null,null);
+		Employe tyty = ligue.addEmploye("tyty", "L", null, null, null,null);
+		ligue.setAdministrateur(Michel);
+		assertTrue(Michel.estAdmin(ligue)); // vérif si la ligue est vide
+		assertEquals(Michel,ligue.getAdministrateur());
+		ligue.setAdministrateur(tyty);
+		//vérif que tyty est nouvel admin
+		ligue.getAdministrateur();
+		assertEquals(tyty,ligue.getAdministrateur());
+		assertTrue(tyty.estAdmin(ligue)); // vérif si la ligue est vide
+		//verif que michel n'est plus admin
+		assertFalse(Michel.estAdmin(ligue));
 	}
 	
 	// TEST SUPPRESSION ADMIN
+	@Test
+	public void removeAdmin() throws SauvegardeImpossible {
+		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
+		Employe employe = ligue.addEmploye("Michel", "L", null, null, null,null);
+		employe.estAdmin(ligue);
+		ligue.getAdministrateur().remove();
+
+		assertEquals(ligue.getAdministrateur(), gestionPersonnel.getRoot()); // vérif si la ligue est vide
+	}
 	
 	
 	// TEST GET NOM
