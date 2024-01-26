@@ -62,9 +62,9 @@ class testLigue
 	@Test
 	public void setLigue() throws SauvegardeImpossible {
 		
-		Ligue ligue = gestionPersonnel.addLigue(-1,"Fléchettes");
-		ligue.setNom("Petanque");
-		assertEquals("Petanque", ligue.getNom());
+		Ligue ligue = gestionPersonnel.addLigue(-1,"Fléchettes"); // création d'une ligue
+		ligue.setNom("Petanque"); // changement de nom avec méthode set
+		assertEquals("Petanque", ligue.getNom()); // vérif si le nom est changé
 	}
 
 	
