@@ -14,7 +14,7 @@ class testLigue
 	
 	
 
-	// test GET EMPLOYE
+	// test ADD EMPLOYE
 	@Test
 	void addEmploye() throws SauvegardeImpossible
 	{
@@ -29,10 +29,15 @@ class testLigue
 	// A FAIRE THEO
 	
 	// TEST SUPRESSION EMPLOYE
-	@test
-	public void remove() throws SauvegardeImpossible 
+	@Test
+	public void removeEmploye() throws SauvegardeImpossible 
 	{
-		
+		Ligue ligue = gestionPersonnel.addLigue("Fléchettes"); // création ligue
+		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty", null, null); // création employé
+		employe.remove(); // supprime employé de la ligue
+		ligue.getEmployes().isEmpty();//retourne vrai si employe supprimé
+		assertTrue(ligue.getEmployes().isEmpty());// si méthode isempty est vrai donc test ok
+			
 	}
 	
 	//TEST CREATION LIGUE
@@ -42,6 +47,7 @@ class testLigue
 			Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
 			assertEquals("Fléchettes", ligue.getNom());
 		}
+		
 	//test GETLIGUE
 	@Test 
 	 public void getLigues() throws SauvegardeImpossible 
@@ -49,20 +55,29 @@ class testLigue
 
 		 	Ligue ligue = gestionPersonnel.addLigue("Fléchettes");// création d'une ligue        
 	        // Appeler le getter et vérifier si la valeur renvoyée est correcte
-	        assertEquals("Fléchettes", ligue.getLigue());
-	   }
+	        assertTrue(gestionPersonnel.getLigues().contains(ligue));	//retourne vrai si ligue est récupérée   
+	        }
 	
-	// TEST SET LIGUE
+	// TEST SET NOM LIGUE
 	@Test
 	public void setLigue() throws SauvegardeImpossible {
 		
-		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
-		//ligue.administrateur.getLigue() = "nouveauNom";
-		assertEquals("nouveauNom", ligue.administrateur.getLigue());
+		Ligue ligue = gestionPersonnel.addLigue(-1,"Fléchettes");
+		ligue.setNom("Petanque");
+		assertEquals("Petanque", ligue.getNom());
 	}
 
 	
 	// TEST SUPPRESSION LIGUE
+	@test
+	public void removeLigues() throws SauvegardeImpossible 
+	{
+		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
+		assertEquals(ligue = null);
+		
+		
+	}
+	
 	
 	// TEST CHANGEMENT ADMIN
 	

@@ -49,9 +49,7 @@ public class Employe implements Serializable, Comparable<Employe>
 	{
 		return ligue.getAdministrateur() == this;
 	}
-	public void setLigue(Ligue ligue){
-		this.ligue=ligue;
-	}
+
 
 	/**
 	 * Retourne vrai ssi l'employé est le root.
