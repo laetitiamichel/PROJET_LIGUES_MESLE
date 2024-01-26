@@ -12,6 +12,7 @@ class testLigue
 {
 	GestionPersonnel gestionPersonnel = GestionPersonnel.getGestionPersonnel();
 	
+	//TEST CREATION LIGUE
 	@Test
 	void createLigue() throws SauvegardeImpossible
 	{
@@ -19,6 +20,7 @@ class testLigue
 		assertEquals("Fléchettes", ligue.getNom());
 	}
 
+	// test GET EMPLOYE
 	@Test
 	void addEmploye() throws SauvegardeImpossible
 	{
@@ -28,7 +30,37 @@ class testLigue
 
 		assertEquals(employe, ligue.getEmployes().first());
 	}
+	// test SET EMPLOYE
+	// A FAIRE THEO
 	
+	//test GETLIGUE
+	@Test 
+	 public void getLigues() throws SauvegardeImpossible 
+	 {
+
+		 	Ligue ligue = gestionPersonnel.addLigue("Fléchettes");// création d'une ligue        
+	        // Appeler le getter et vérifier si la valeur renvoyée est correcte
+	        assertEquals("Fléchettes", ligue.getLigue());
+	   }
+	
+	// TEST SET LIGUE
+	@Test
+	public void setLigue() throws SauvegardeImpossible {
+		
+		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
+		//ligue.administrateur.getLigue() = "nouveauNom";
+		assertEquals("nouveauNom", ligue.administrateur.getLigue());
+	}
+	// TEST SUPRESSION EMPLOYE
+	
+	// TEST SUPPRESSION LIGUE
+	
+	// TEST CHANGEMENT ADMIN
+	
+	// TEST SUPPRESSION ADMIN
+	
+	
+	// TEST GET NOM
 	 @Test 
 	 public void getNom() throws SauvegardeImpossible 
 	 {
@@ -41,6 +73,7 @@ class testLigue
 	        assertEquals("Michel", employe.getNom());
 	   }
 	 
+	 //TEST GET PRENOM
 	 @Test 
 	 public void getPrenom() throws SauvegardeImpossible 
 	 {
@@ -53,6 +86,7 @@ class testLigue
 	        assertEquals("Laetitia", employe.getPrenom());
 	   }
 	 
+	 //TEST GET MAIL
 	 @Test 
 	 public void getMail() throws SauvegardeImpossible 
 	 {
@@ -66,6 +100,7 @@ class testLigue
 	        assertEquals("lm@gmail.com", employe.getMail());
 	   }
 	 
+	 // TEST GET DATE DEPART
 	 @Test 
 	 public void getDateDepart() throws SauvegardeImpossible 
 	 {
@@ -78,6 +113,7 @@ class testLigue
 	        assertEquals("1/01/2001", employe.getDateDepart());
 	   }
 	 
+	 // test GET DATEARRIVEE
 	 @Test 
 	 public void getDateArrivee() throws SauvegardeImpossible 
 	 {
