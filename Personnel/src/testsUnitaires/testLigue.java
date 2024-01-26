@@ -69,17 +69,29 @@ class testLigue
 
 	
 	// TEST SUPPRESSION LIGUE
-	@test
+	@Test
 	public void removeLigues() throws SauvegardeImpossible 
 	{
-		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
-		assertEquals(ligue = null);
+		Ligue ligue = gestionPersonnel.addLigue(-1,"Fléchettes");
+		ligue.remove(); // supression ligue
+		ligue.setNom("Fléchettes");
+		ligue.getNom().isEmpty(); // retourne VRAI si ligue est supprimée
+		assertTrue(ligue.getNom().isEmpty()); // vérif si la ligue est vide
 		
 		
 	}
 	
 	
 	// TEST CHANGEMENT ADMIN
+	@Test
+	public void estAdmin() throws SauvegardeImpossible 
+	{
+		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
+		Employe employe = ligue.addEmploye("Michel", "L", null, null, null,null);
+		assertTrue(employe.estAdmin(ligue)); // vérif si la ligue est vide
+		
+		
+	}
 	
 	// TEST SUPPRESSION ADMIN
 	
