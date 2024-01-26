@@ -31,7 +31,7 @@ class testLigue
 		assertEquals(employe, ligue.getEmployes().first());
 	}
 	// test SET EMPLOYE
-	
+	// A FAIRE THEO
 	
 	//test GETLIGUE
 	@Test 
@@ -51,6 +51,14 @@ class testLigue
 		//ligue.administrateur.getLigue() = "nouveauNom";
 		assertEquals("nouveauNom", ligue.administrateur.getLigue());
 	}
+	// TEST SUPRESSION EMPLOYE
+	
+	// TEST SUPPRESSION LIGUE
+	
+	// TEST CHANGEMENT ADMIN
+	
+	// TEST SUPPRESSION ADMIN
+	
 	
 	// TEST GET NOM
 	 @Test 
