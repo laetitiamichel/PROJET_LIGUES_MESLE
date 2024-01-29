@@ -131,7 +131,18 @@ public class LigueConsole
 				(index, element) -> {ligue.setAdministrateur(element);}
 				);
 		
-	}		
+	}
+	
+	//SELECTIONNER UN EMPLOYE
+	/*private List<Ligue> selectionnerEmploye()
+	{
+		return new List<Ligue>("Sélectionner un employé", "m", 
+				() -> new ArrayList<>(gestionPersonnel.getLigues()),
+				(element) -> editerLigue(element)
+				);
+	}*/
+    	
+	
 
 	private List<Employe> modifierEmploye(final Ligue ligue)
 	{
