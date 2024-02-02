@@ -25,7 +25,8 @@ Cet arbre a été réalisé sur le site FIGMA:
 [Lien de l'arbre](https://www.figma.com/file/nKBFi9b7gsDLVyzOhAWF3z/Arbre-Heuristique?type=whiteboard&node-id=0%3A1&t=NrrkjkS34Nig52fh-1) 
 
 
-![Arbre Heuristique](https://hackmd.io/_uploads/SJ7bnlZ9a.png)
+
+![Arbre Heuristique (1)](https://hackmd.io/_uploads/SyTXYuq5T.png)
 
 
 
@@ -35,18 +36,22 @@ Cet arbre a été réalisé sur le site FIGMA:
 
 En utilisant les données s'affichant en ligne de commande ainsi que le code de la couche métier de l'application, proposer un MCD permettant de représenter les données de l'application avec une base de données relationnelles.
 
-Ici le MCD a été réalisé sur le logiciel MOKODO:
+Ici le MCD a été réalisé sur le logiciel MOCODO:
 
-![MCD_VF](https://hackmd.io/_uploads/rkhKVzuKp.png)
-
-
+![MCD](https://hackmd.io/_uploads/rJdRJNq9a.png)
 
 
 
-```
-COMPOSER, 1N LIGUE, 11 EMPLOYE
-LIGUE: id_ligue, nomLigue, admin 
 
-EMPLOYE: id_employe, nom, prenom, mail, password, dateArrivee,dateDepart, root 
 
 ```
+COMPOSER, 0N LIGUE, 01 EMPLOYE
+LIGUE: id_ligue, nomLigue 
+
+EMPLOYE: id_employe, nom, prenom, mail, password, dateArrivee,dateDepart, statut 
+
+```
+
+**SHEMA RELATIONNEL:**
+EMPLOYE(~~id_employe~~, nom, prenom, mail, password, dateArrivee, dateDepart, statut, #id_ligue) 
+LIGUE(~~id_ligue~~, nomLigue)
