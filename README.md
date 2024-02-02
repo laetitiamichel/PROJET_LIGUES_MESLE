@@ -50,6 +50,8 @@ LIGUE: id_ligue, nomLigue
 
 EMPLOYE: id_employe, nom, prenom, mail, password, dateArrivee,dateDepart, statut 
 
-
-
 ```
+
+**SHEMA RELATIONNEL:**
+EMPLOYE(~~id_employe~~, nom, prenom, mail, password, dateArrivee, dateDepart, statut, #id_ligue) 
+LIGUE(~~id_ligue~~, nomLigue)
