@@ -25,7 +25,7 @@ Cet arbre a été réalisé sur le site FIGMA:
 [Lien de l'arbre](https://www.figma.com/file/nKBFi9b7gsDLVyzOhAWF3z/Arbre-Heuristique?type=whiteboard&node-id=0%3A1&t=NrrkjkS34Nig52fh-1) 
 
 
-![Arbre Heuristique](https://hackmd.io/_uploads/Byg-0dqqT.jpg)
+![Arbre Heuristique (3) (1)](https://hackmd.io/_uploads/rk2Ow5qcT.jpg)
 
 
 
