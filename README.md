@@ -50,8 +50,14 @@ EMPLOYE: id_employe, nom, prenom, mail, password, dateArrivee,dateDepart, statut
 ```
 
 **SHEMA RELATIONNEL:**
-```EMPLOYE(~~id_employe~~, nom, prenom, mail, password, dateArrivee, dateDepart, statut, #id_ligue) 
-LIGUE(~~id_ligue~~, nomLigue)```
+
+```
+EMPLOYE(~~id_employe~~, nom, prenom, mail, password, dateArrivee, dateDepart, statut, #id_ligue) 
+LIGUE(~~id_ligue~~, nomLigue)
+
+```
+
+## Création BDD Laragon:
 
 ![sql_bdd](https://hackmd.io/_uploads/SJVsXYqqT.png)
 ![sql_tables](https://hackmd.io/_uploads/Bk9jQF99p.png)
