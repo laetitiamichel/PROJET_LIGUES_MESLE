@@ -130,6 +130,7 @@ public class LigueConsole
 		return new List<>("Sélectionner un employé", "f", 
 				() -> new ArrayList<>(ligue.getEmployes()),
 				(index,element) -> {employeConsole.editerEmploye();}
+				//(element) -> selectionnerEmploye(element);
 				);
 	}
     	
