@@ -62,6 +62,10 @@ LIGUE(~~id_ligue~~, nomLigue)
 ![sql_bdd](https://hackmd.io/_uploads/SJVsXYqqT.png)
 ![sql_tables](https://hackmd.io/_uploads/Bk9jQF99p.png)
 
-![laragon_table_employe](https://hackmd.io/_uploads/SyLDrY9c6.png)
-![laragon_table_ligue](https://hackmd.io/_uploads/r1hvStc5p.png)
+![foreign_key](https://hackmd.io/_uploads/Bym7FDWja.png)
+![table_employe_foreignKey](https://hackmd.io/_uploads/SyK7tPWsT.png)
+
+![Laragon_tableEmploye](https://hackmd.io/_uploads/SkWFtPZop.png)
+![Laragon_tableLigue](https://hackmd.io/_uploads/r1a3Kw-ia.png)
+
 
