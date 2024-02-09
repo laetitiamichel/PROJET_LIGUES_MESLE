@@ -74,19 +74,20 @@ public class EmployeConsole
 			}
 		
 	//AJOUTER UNE DATE ARRIVEE DE L'EMPLOYE:
-		private Option ajouterDateArrivee()
+		private Option ajouterDateArrivee(final Employe employe)
 	{
-			return new Option("Ajouter une date d'arrivée", "da", () -> 
-			{
-				try
-				{ 
-			          employe.setDateArrivee(nouvelleDateArrivee);
-			                // Vous pouvez ajouter un message de confirmation ici si nécessaire
-			            }
-				catch(SauvegardeImpossible exception)
-				{
-					System.err.println("Impossible de sauvegarder cette ligue");				}
+			return new Option("Ajouter une date d'arrivée", "da", () -> {employe.setDateArrivee(getString.parse("date Arrivée : "));});
+			
+//				try
+//				{ 
+//					 	LocalDate nouvelleDateArrivee = this.ajouterDateArrivee();
+//			            employe.setDateArrivee(nouvelleDateArrivee);
+//			            }
+//				catch(SauvegardeImpossible exception)
+//				{
+//					System.err.println("Impossible de sauvegarder cette ligue");				}
 		});
+			
 		//AJOUTER UNE DATE DE DEPART DE L'EMPLOYE:
 			private Option ajouterDateDepart()
 			{
