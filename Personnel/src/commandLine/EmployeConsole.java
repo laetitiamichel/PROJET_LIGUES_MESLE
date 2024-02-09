@@ -34,8 +34,8 @@ public class EmployeConsole
 			menu.add(changerMail(employe));
 			menu.add(changerPassword(employe));
 			menu.add(nommerAdministrateur(ligue,employe));
-			menu.add(dateArrivee(employe));
-			menu.add(dateDepart(employe));
+			menu.add(ajouterDateArrivee(employe, null));
+			menu.add(ajouterDateDepart(employe, null));
 			menu.add(supprimerEmploye(ligue));
 			menu.addBack("q");
 			return menu;
@@ -77,7 +77,14 @@ public class EmployeConsole
 	//AJOUTER UNE DATE ARRIVEE DE L'EMPLOYE:
 		private Option ajouterDateArrivee(final Employe employe, final LocalDate dateArrivee)
 	{
-			return new Option("Ajouter une date d'arrivée", "da", () -> {employe.setDateArrivee();});
+			return new Option("Ajouter une date d'arrivée", "da", 
+					() -> { 
+						//instancier la variable date:
+						LocalDate nouvelleDateArrivee = new employe.setDateArrivee();  
+						//employe.setDateArrivee(dateArrivee);
+						dateArrivee.parse(getString("entrer la date:");}
+					);
+					
 	}	
 //				try
 //				{ 
@@ -92,7 +99,7 @@ public class EmployeConsole
 		//AJOUTER UNE DATE DE DEPART DE L'EMPLOYE:
 			private Option ajouterDateDepart(final Employe employe, final LocalDate dateArrivee)
 			{
-				return new Option("Ajouter une date d'arrivée", "da", () -> {employe.setDateArrivee();});
+				return new Option("Ajouter une date de départ", "dd", () -> {employe.setDateDepart();});
 				
 			}
 	//SUPPRIMER EMPLOYE SELECTIONNE
