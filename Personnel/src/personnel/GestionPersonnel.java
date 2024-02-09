@@ -80,6 +80,11 @@ public class GestionPersonnel implements Serializable
 	{
 		return Collections.unmodifiableSortedSet(ligues);
 	}
+//	public SortedSet<Employe> getAdmins()
+//	{
+//		//boucle liste de ligue sur fonction ligne 79
+//		return Collections.unmodifiableSortedSet(ligues);
+//	}
 
 	public Ligue addLigue(String nom) throws SauvegardeImpossible
 	{
