@@ -2,6 +2,7 @@ package commandLine;
 
 import static commandLineMenus.rendering.examples.util.InOut.getString;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import commandLineMenus.List;
@@ -74,10 +75,10 @@ public class EmployeConsole
 			}
 		
 	//AJOUTER UNE DATE ARRIVEE DE L'EMPLOYE:
-		private Option ajouterDateArrivee(final Employe employe)
+		private Option ajouterDateArrivee(final Employe employe, final LocalDate dateArrivee)
 	{
-			return new Option("Ajouter une date d'arrivée", "da", () -> {employe.setDateArrivee(getString.parse("date Arrivée : "));});
-			
+			return new Option("Ajouter une date d'arrivée", "da", () -> {employe.setDateArrivee();});
+	}	
 //				try
 //				{ 
 //					 	LocalDate nouvelleDateArrivee = this.ajouterDateArrivee();
@@ -86,22 +87,14 @@ public class EmployeConsole
 //				catch(SauvegardeImpossible exception)
 //				{
 //					System.err.println("Impossible de sauvegarder cette ligue");				}
-		});
+		//});
 			
 		//AJOUTER UNE DATE DE DEPART DE L'EMPLOYE:
-			private Option ajouterDateDepart()
+			private Option ajouterDateDepart(final Employe employe, final LocalDate dateArrivee)
 			{
-				return new Option("Ajouter une date d'arrivée", "da", () -> 
-				{
-					try
-					{
-						 Employe.setDateArrivee(getString("date: "));
-					}
-					catch(SauvegardeImpossible exception)
-					{
-						System.err.println("Impossible de sauvegarder cette ligue");
-					}
-			});
+				return new Option("Ajouter une date d'arrivée", "da", () -> {employe.setDateArrivee();});
+				
+			}
 	//SUPPRIMER EMPLOYE SELECTIONNE
 		private List<Employe> supprimerEmploye(final Ligue ligue)
 		{
