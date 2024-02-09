@@ -79,7 +79,8 @@ public class EmployeConsole
 		{
 			return LocalDate.parse(getString(message));
 		}
-	//AJOUTER UNE DATE ARRIVEE DE L'EMPLOYE:
+	
+		//AJOUTER UNE DATE ARRIVEE DE L'EMPLOYE:
 		private Option ajouterDateArrivee(final Employe employe, final LocalDate dateArrivee)
 	{
 			return new Option("Ajouter une date d'arrivée", "da", () -> { 
@@ -89,9 +90,9 @@ public class EmployeConsole
 			try
 				{ 
 				LocalDate newDate = LocalDate.parse(getString("entrer la date:"));
-				employe.setDateArrivee(newDate)
+				employe.setDateArrivee(newDate);
 				}
-			;)   
+			)   
 				catch(SauvegardeImpossible exception)
 				{
 					System.err.println("LA date d'arrivée doit être antérieure à la date de départ");
