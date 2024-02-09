@@ -92,12 +92,12 @@ public class EmployeConsole
 				LocalDate newDate = LocalDate.parse(getString("entrer la date:"));
 				employe.setDateArrivee(newDate);
 				}
-			)   
+			   
 				catch(SauvegardeImpossible exception)
 				{
 					System.err.println("LA date d'arrivée doit être antérieure à la date de départ");
 				}
-		;)
+			});
 			
 	}
 			
