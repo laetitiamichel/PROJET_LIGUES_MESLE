@@ -32,10 +32,12 @@ public class EmployeConsole
 			menu.add(changerMail(employe));
 			menu.add(changerPassword(employe));
 			menu.add(nommerAdministrateur(ligue,employe));
+			menu.add(supprimerEmploye(ligue));
 			menu.addBack("q");
 			return menu;
 	}
 
+	//CHANGER NOM EMPLOYE SELECTIONNE
 	private Option changerNom(final Employe employe)
 	{
 		return new Option("Changer le nom", "n", 
@@ -43,25 +45,38 @@ public class EmployeConsole
 			);
 	}
 	
+	//CHANGER PRENOM EMPLOYE
 	private Option changerPrenom(final Employe employe)
 	{
 		return new Option("Changer le prénom", "p", () -> {employe.setPrenom(getString("Nouveau prénom : "));});
 	}
 	
+	//CHANGER MAIL EMPLOYE
 	private Option changerMail(final Employe employe)
 	{
 		return new Option("Changer le mail", "e", () -> {employe.setMail(getString("Nouveau mail : "));});
 	}
 	
+	//CHANGER PASSWORD EMPLOYE
 	private Option changerPassword(final Employe employe)
 	{
 		return new Option("Changer le password", "x", () -> {employe.setPassword(getString("Nouveau password : "));});
 	}
 	
-	// permet de changer d'admin d'une ligue
+	// permet de changer/nommer l'admin d'une ligue
 		private Option nommerAdministrateur(final Ligue ligue,final Employe employe)
 			{
 					return new Option("Nommer Administrateur","a", () -> {ligue.setAdministrateur(employe);});
 						
-}
+			}
+		
+	//SUPPRIMER EMPLOYE SELECTIONNE
+		private List<Employe> supprimerEmploye(final Ligue ligue)
+		{
+			return new List<>("Supprimer un employé", "s", 
+			() -> new ArrayList<>(ligue.getEmployes()),
+			(index, element) -> {element.remove();}
+							);
+		}
+
 }
