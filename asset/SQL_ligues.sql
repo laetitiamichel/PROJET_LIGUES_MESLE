@@ -15,23 +15,24 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 -- Listage de la structure de table proj_ligues. employe
-DROP TABLE IF EXISTS `employe`;
 CREATE TABLE IF NOT EXISTS `employe` (
   `ID_employe` int NOT NULL AUTO_INCREMENT,
-  `nom` varchar(50) DEFAULT NULL,
+  `nom` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `prenom` varchar(50) DEFAULT NULL,
   `mail` varchar(50) DEFAULT NULL,
-  `password` varchar(50) NOT NULL DEFAULT '',
-  `dateArrivee` date NOT NULL,
-  `dateDepart` date NOT NULL,
-  `statut` varchar(50) NOT NULL DEFAULT '',
-  PRIMARY KEY (`ID_employe`)
+  `password` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT '',
+  `dateArrivee` date DEFAULT NULL,
+  `dateDepart` date DEFAULT NULL,
+  `statut` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT '',
+  `ID_ligue` int DEFAULT NULL,
+  PRIMARY KEY (`ID_employe`),
+  KEY `fk_nomLigue` (`ID_ligue`),
+  CONSTRAINT `fk_nomLigue` FOREIGN KEY (`ID_ligue`) REFERENCES `ligue` (`ID_ligue`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Les données exportées n'étaient pas sélectionnées.
 
 -- Listage de la structure de table proj_ligues. ligue
-DROP TABLE IF EXISTS `ligue`;
 CREATE TABLE IF NOT EXISTS `ligue` (
   `ID_ligue` int NOT NULL AUTO_INCREMENT,
   `nomLigue` varchar(50) DEFAULT NULL,

@@ -109,8 +109,8 @@ public class LigueConsole
 		menu.add(selectionnerEmploye(ligue));
 		menu.add(afficherEmployes(ligue));
 		menu.add(ajouterEmploye(ligue));
-		menu.add(modifierEmploye(ligue));
-		menu.add(supprimerEmploye(ligue));
+		//menu.add(modifierEmploye(ligue));
+		//menu.add(supprimerEmploye(ligue));
 		menu.addBack("q");
 		return menu;
 	}
@@ -129,20 +129,21 @@ public class LigueConsole
 	{
 		return new List<>("Sélectionner un employé", "f", 
 				() -> new ArrayList<>(ligue.getEmployes()),
-				(index,element) -> {employeConsole.editerEmploye();}
+				//affiche le sous menu - sélection un employé de la ligue pré sélectionnée
+				(index,employe) -> employeConsole.editerEmploye(ligue,employe)
 				//(element) -> selectionnerEmploye(element);
 				);
 	}
     	
 	
 
-	private List<Employe> modifierEmploye(final Ligue ligue)
+	/*private List<Employe> modifierEmploye(final Ligue ligue)
 	{
 		return new List<>("Modifier un employé", "e", 
 				() -> new ArrayList<>(ligue.getEmployes()),
 				employeConsole.editerEmploye()
 				);
-	}
+	}*/
 	
 	private Option supprimer(Ligue ligue)
 	{
@@ -150,23 +151,14 @@ public class LigueConsole
 	}
 	
 
-	private Menu selectionnerUnEmploye(Ligue ligue)
-	{
-		Menu menu = new Menu("Sélectionner un employé " , "f");
-		menu.add(changerAdministrateur(ligue));
-		menu.add(supprimerEmploye(ligue));
-		menu.addBack("q");
-		return menu;
-	}
-	// permet de changer d'admin d'une ligue
-	private List<Employe> changerAdministrateur(final Ligue ligue)
-		{
-			
-			return new List<>("Changer l'administrateur", "g",
-					() -> new ArrayList<>(ligue.getEmployes()),
-					(index, element) -> {ligue.setAdministrateur(element);}
-					);
-			
-		}
+//	/*private Menu selectionnerUnEmploye(Ligue ligue)
+//	{
+//		Menu menu = new Menu("Sélectionner un employé " , "f");
+//		menu.add(changerAdministrateur(ligue));
+//		menu.add(supprimerEmploye(ligue));
+//		menu.addBack("q");
+//		return menu;
+//	}*/
+	
 }
 

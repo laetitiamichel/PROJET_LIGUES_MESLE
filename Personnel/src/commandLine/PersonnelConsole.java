@@ -25,7 +25,7 @@ public class PersonnelConsole
 	private Menu menuPrincipal()
 	{
 		Menu menu = new Menu("Gestion du personnel des ligues");
-		menu.add(employeConsole.editerEmploye(gestionPersonnel.getRoot()));
+		menu.add(employeConsole.editerEmploye(null,gestionPersonnel.getRoot()));
 		menu.add(ligueConsole.menuLigues());
 		menu.add(menuQuitter());
 		return menu;

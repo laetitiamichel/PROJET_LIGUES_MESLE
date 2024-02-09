@@ -2,10 +2,14 @@ package commandLine;
 
 import static commandLineMenus.rendering.examples.util.InOut.getString;
 
+import java.util.ArrayList;
+
+import commandLineMenus.List;
 import commandLineMenus.ListOption;
 import commandLineMenus.Menu;
 import commandLineMenus.Option;
 import personnel.Employe;
+import personnel.Ligue;
 
 public class EmployeConsole 
 {
@@ -14,12 +18,12 @@ public class EmployeConsole
 		return new Option("Afficher l'employé", "l", () -> {System.out.println(employe);});
 	}
 
-	ListOption<Employe> editerEmploye()
-	{
-		return (employe) -> editerEmploye(employe);		
-	}
+//	ListOption<Employe> editerEmploye()
+//	{
+//		return (employe) -> editerEmploye(employe);		
+//	}
 
-	Option editerEmploye(Employe employe)
+	Option editerEmploye(Ligue ligue,Employe employe)
 	{
 			Menu menu = new Menu("Gérer le compte " + employe.getNom(), "c");
 			menu.add(afficher(employe));
@@ -27,6 +31,7 @@ public class EmployeConsole
 			menu.add(changerPrenom(employe));
 			menu.add(changerMail(employe));
 			menu.add(changerPassword(employe));
+			menu.add(nommerAdministrateur(ligue,employe));
 			menu.addBack("q");
 			return menu;
 	}
@@ -53,5 +58,10 @@ public class EmployeConsole
 		return new Option("Changer le password", "x", () -> {employe.setPassword(getString("Nouveau password : "));});
 	}
 	
-
+	// permet de changer d'admin d'une ligue
+		private Option nommerAdministrateur(final Ligue ligue,final Employe employe)
+			{
+					return new Option("Nommer Administrateur","a", () -> {ligue.setAdministrateur(employe);});
+						
+}
 }
