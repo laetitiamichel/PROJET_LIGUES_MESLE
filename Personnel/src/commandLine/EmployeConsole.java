@@ -74,27 +74,31 @@ public class EmployeConsole
 						
 			}
 		
+		
+		LocalDate getDate(String message)
+		{
+			return LocalDate.parse(getString(message));
+		}
 	//AJOUTER UNE DATE ARRIVEE DE L'EMPLOYE:
 		private Option ajouterDateArrivee(final Employe employe, final LocalDate dateArrivee)
 	{
-			return new Option("Ajouter une date d'arrivée", "da", 
-					() -> { 
+			return new Option("Ajouter une date d'arrivée", "da", () -> { 
 						//instancier la variable date:
-						LocalDate nouvelleDateArrivee = new employe.setDateArrivee();  
+						//LocalDate localDate = LocalDate.parse("YYYY-MM-DD");  
 						//employe.setDateArrivee(dateArrivee);
-						dateArrivee.parse(getString("entrer la date:");}
-					);
-					
-	}	
-//				try
-//				{ 
-//					 	LocalDate nouvelleDateArrivee = this.ajouterDateArrivee();
-//			            employe.setDateArrivee(nouvelleDateArrivee);
-//			            }
-//				catch(SauvegardeImpossible exception)
-//				{
-//					System.err.println("Impossible de sauvegarder cette ligue");				}
-		//});
+			try
+				{ 
+				LocalDate newDate = LocalDate.parse(getString("entrer la date:"));
+				employe.setDateArrivee(newDate)
+				}
+			;)   
+				catch(SauvegardeImpossible exception)
+				{
+					System.err.println("LA date d'arrivée doit être antérieure à la date de départ");
+				}
+		;)
+			
+	}
 			
 		//AJOUTER UNE DATE DE DEPART DE L'EMPLOYE:
 			private Option ajouterDateDepart(final Employe employe, final LocalDate dateArrivee)

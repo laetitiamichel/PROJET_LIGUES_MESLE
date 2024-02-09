@@ -135,8 +135,11 @@ public class LigueConsole
 				() -> 
 				{
 					ligue.addEmploye(getString("nom : "), 
-						getString("prenom : "), getString("mail : "), 
-						getString("password : "),null,null);
+						getString("prenom : "), 
+						getString("mail : "), 
+						getString("password : "), 
+						employeConsole.getDate("Date d'arrivée (format : YYYY-MM-DD) : "),
+						getString("date Départ: "));
 				}
 		);
 	}

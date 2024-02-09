@@ -167,15 +167,15 @@ public class Employe implements Serializable, Comparable<Employe>
 	}
 	
     /* modifie la date d'arrivée de l'employé dans la ligue */
-	public void setDateArrivee()
+	public void setDateArrivee(LocalDate dateArrivee)
 	{
-		this.dateArrivee = dateArrivee;
+		
 		
 		if (dateArrivee.isAfter(dateDepart)) 
 		{
 	        throw new IllegalArgumentException("La date d'arrivée doit être antérieure à la date de départ.");
 	    }
-	   
+		this.dateArrivee = dateArrivee;
 	}
 
 
