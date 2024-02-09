@@ -10,6 +10,7 @@ import commandLineMenus.Menu;
 import commandLineMenus.Option;
 import personnel.Employe;
 import personnel.Ligue;
+import personnel.SauvegardeImpossible;
 
 public class EmployeConsole 
 {
@@ -32,6 +33,8 @@ public class EmployeConsole
 			menu.add(changerMail(employe));
 			menu.add(changerPassword(employe));
 			menu.add(nommerAdministrateur(ligue,employe));
+			menu.add(dateArrivee(employe));
+			menu.add(dateDepart(employe));
 			menu.add(supprimerEmploye(ligue));
 			menu.addBack("q");
 			return menu;
@@ -70,6 +73,34 @@ public class EmployeConsole
 						
 			}
 		
+	//AJOUTER UNE DATE ARRIVEE DE L'EMPLOYE:
+		private Option ajouterDateArrivee()
+	{
+			return new Option("Ajouter une date d'arrivée", "da", () -> 
+			{
+				try
+				{ 
+			          employe.setDateArrivee(nouvelleDateArrivee);
+			                // Vous pouvez ajouter un message de confirmation ici si nécessaire
+			            }
+				catch(SauvegardeImpossible exception)
+				{
+					System.err.println("Impossible de sauvegarder cette ligue");				}
+		});
+		//AJOUTER UNE DATE DE DEPART DE L'EMPLOYE:
+			private Option ajouterDateDepart()
+			{
+				return new Option("Ajouter une date d'arrivée", "da", () -> 
+				{
+					try
+					{
+						 Employe.setDateArrivee(getString("date: "));
+					}
+					catch(SauvegardeImpossible exception)
+					{
+						System.err.println("Impossible de sauvegarder cette ligue");
+					}
+			});
 	//SUPPRIMER EMPLOYE SELECTIONNE
 		private List<Employe> supprimerEmploye(final Ligue ligue)
 		{

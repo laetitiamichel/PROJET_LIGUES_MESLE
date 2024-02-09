@@ -165,6 +165,7 @@ public class Employe implements Serializable, Comparable<Employe>
 	{
 		return dateArrivee;
 	}
+	
     /* modifie la date d'arrivée de l'employé dans la ligue */
 	public void setDateArrivee()
 	{
