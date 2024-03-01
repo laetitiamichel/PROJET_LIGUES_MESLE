@@ -69,5 +69,5 @@ LIGUE(~~id_ligue~~, nomLigue)
 
 ## MAQUETTE
 
-[lien de la maquette](file:///C:/Users/laeti/git/PROJET_LIGUES_MESLE/asset/maquettes_1%20(1).pdf)
+[lien de la maquette](file:///C:/Users/laeti/git/PROJET_LIGUES_MESLE/asset/pages/index.html)
 
