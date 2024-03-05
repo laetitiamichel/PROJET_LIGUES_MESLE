@@ -1,5 +1,7 @@
 package personnel;
 
+import java.sql.Connection;
+
 public interface Passerelle 
 {
 	public GestionPersonnel getGestionPersonnel();
@@ -7,4 +9,5 @@ public interface Passerelle
 	public int insert(Ligue ligue) throws SauvegardeImpossible;
 	//itération 3:
 	public int insert(Employe employe) throws SauvegardeImpossible;
+	public Connection getConnection();
 }
