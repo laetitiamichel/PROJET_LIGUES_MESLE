@@ -1,5 +1,9 @@
 package personnel;
-
+//itération 3:
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.SortedSet;
@@ -40,6 +44,8 @@ public class GestionPersonnel implements Serializable
 			gestionPersonnel = passerelle.getGestionPersonnel();
 			if (gestionPersonnel == null)
 				gestionPersonnel = new GestionPersonnel();
+			//itération 3 = connexion à la bdd:
+			 Connection connection = passerelle.getConnection();
 		}
 		return gestionPersonnel;
 	}
@@ -112,7 +118,11 @@ public class GestionPersonnel implements Serializable
 	{
 		return passerelle.insert(ligue);
 	}
-
+	
+	int insert(Employe employe) throws SauvegardeImpossible
+	{
+		return passerelle.insert(employe);
+	}
 	/**
 	 * Retourne le root (super-utilisateur).
 	 * @return le root.
