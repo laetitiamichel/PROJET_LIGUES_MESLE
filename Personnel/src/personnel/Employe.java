@@ -18,6 +18,8 @@ public class Employe implements Serializable, Comparable<Employe>
 	private String nom, prenom, password, mail;
 	private Ligue ligue; 
 	private GestionPersonnel gestionPersonnel;
+	// insertion variable d'instance id
+	private int id;
 	// insertion variables localDate:
 	private LocalDate dateArrivee, dateDepart;
 	
@@ -33,6 +35,7 @@ public class Employe implements Serializable, Comparable<Employe>
 		this.password = password;
 		this.dateArrivee = dateArrivee;
 		this.dateDepart = dateDepart;
+		
 	}
 	
 	/**
