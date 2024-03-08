@@ -67,6 +67,6 @@ LIGUE(~~id_ligue~~, nomLigue)
 ![Laragon_tableEmploye](https://hackmd.io/_uploads/SkWFtPZop.png)
 ![Laragon_tableLigue](https://hackmd.io/_uploads/r1a3Kw-ia.png)
 
-## MAQUETTE
+## MAQUETTE GRAPHIQUE
 ![MAQUETTE_GRAPHIQUE](https://hackmd.io/_uploads/SJ6hE3_6a.png)
 
