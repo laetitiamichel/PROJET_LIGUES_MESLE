@@ -68,6 +68,5 @@ LIGUE(~~id_ligue~~, nomLigue)
 ![Laragon_tableLigue](https://hackmd.io/_uploads/r1a3Kw-ia.png)
 
 ## MAQUETTE
-
-[lien de la maquette](file:///C:/Users/laeti/git/PROJET_LIGUES_MESLE/asset/pages/index.html)
+![MAQUETTE_GRAPHIQUE](https://hackmd.io/_uploads/SJ6hE3_6a.png)
 
