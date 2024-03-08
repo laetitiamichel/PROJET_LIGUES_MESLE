@@ -164,7 +164,7 @@ class testLigue
 	 
 	 // TEST GET DATE DEPART
 	 @Test 
-	 public void () throws SauvegardeImpossible 
+	 public void getDateDepart() throws SauvegardeImpossible 
 	 {
 		 	Ligue ligue = gestionPersonnel.addLigue("Fléchettes");// création d'une ligue   
 		 	LocalDate DateDepart = LocalDate.parse("1/01/2001");

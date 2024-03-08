@@ -93,7 +93,7 @@ public class EmployeConsole
 				employe.setDateArrivee(newDate);
 				}
 			   
-				catch(SauvegardeImpossible exception)
+				catch(IllegalArgumentException exception)
 				{
 					System.err.println("LA date d'arrivée doit être antérieure à la date de départ");
 				}

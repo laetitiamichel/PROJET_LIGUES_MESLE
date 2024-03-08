@@ -139,7 +139,7 @@ public class LigueConsole
 						getString("mail : "), 
 						getString("password : "), 
 						employeConsole.getDate("Date d'arrivée (format : YYYY-MM-DD) : "),
-						getString("date Départ: "));
+						employeConsole.getDate("Date de départ (format : YYYY-MM-DD) : "));
 				}
 		);
 	}

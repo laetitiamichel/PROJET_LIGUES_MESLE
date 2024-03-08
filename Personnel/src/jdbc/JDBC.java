@@ -11,6 +11,7 @@ import personnel.*;
 
 public class JDBC implements Passerelle 
 {
+	//variable qui permet de rester connecté à la base de données (comme PDO)getconnexion
 	Connection connection;
 
 	public JDBC()

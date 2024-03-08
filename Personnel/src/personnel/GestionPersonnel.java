@@ -44,8 +44,7 @@ public class GestionPersonnel implements Serializable
 			gestionPersonnel = passerelle.getGestionPersonnel();
 			if (gestionPersonnel == null)
 				gestionPersonnel = new GestionPersonnel();
-			//itération 3 = connexion à la bdd:
-			 Connection connection = passerelle.getConnection();
+
 		}
 		return gestionPersonnel;
 	}
