@@ -17,8 +17,8 @@ import java.util.TreeSet;
 public class Ligue implements Serializable, Comparable<Ligue>
 {
 	private static final long serialVersionUID = 1L;
-	private int id = -1;
-	private String nom;
+	private int idLigue = -1;
+	private String nomLigue;
 	private SortedSet<Employe> employes;
 	private Employe administrateur;
 	private GestionPersonnel gestionPersonnel;
@@ -29,24 +29,24 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	 */
 	//création ligue sans connaître l'id car pas encore dans BDD
 	//CONSTRUCTEUR 1 qui appelle CONSTRUCTEUR 2
-	Ligue(GestionPersonnel gestionPersonnel, String nom) throws SauvegardeImpossible
+	Ligue(GestionPersonnel gestionPersonnel, String nomLigue) throws SauvegardeImpossible
 	{
 		//constructeur avec this+()= SURCHARGE avec appel à JDBC de la BDD 
 		//-1 = ID temporaire 
-		this(gestionPersonnel, -1, nom);
-		this.id = gestionPersonnel.insert(this);  
+		this(gestionPersonnel, -1, nomLigue);
+		this.idLigue = gestionPersonnel.insert(this);  
 		//insert ligue dans BDD et valeur id récup par autoincrément
 	}
 	//charge ligue avec ID quand on lance l'appli donc 
 	//on créait objet de type ligue car on connait id dans BDD
 	//ici CONSTRUCTEUR 2:
-	Ligue(GestionPersonnel gestionPersonnel, int id, String nom)
+	Ligue(GestionPersonnel gestionPersonnel, int id, String nomLigue)
 	{
-		this.nom = nom;
+		this.nomLigue = nomLigue;
 		employes = new TreeSet<>();
 		this.gestionPersonnel = gestionPersonnel;
 		administrateur = gestionPersonnel.getRoot();
-		this.id = id;
+		this.idLigue = id;
 	}
 
 	/**
@@ -56,7 +56,7 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	/* GET nom ligue */
 	public String getNom()
 	{
-		return nom;
+		return nomLigue;
 	}
 
 	/**
@@ -64,9 +64,9 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	 * @param nom le nouveau nom de la ligue.
 	 */
 
-	public void setNom(String nom)
+	public void setNom(String nomLigue)
 	{
-		this.nom = nom;
+		this.nomLigue = nomLigue;
 	}
 
 	/**
@@ -77,7 +77,7 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	//récupérer l'ID de la ligue:
 	public int getId()
 	{
-		return id;
+		return idLigue;
 	}
 	//pas de setter car l'id reste fixe = LECTEUR SEULE
 	
@@ -155,6 +155,6 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	@Override
 	public String toString()
 	{
-		return nom;
+		return nomLigue;
 	}
 }

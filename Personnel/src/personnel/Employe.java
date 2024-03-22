@@ -20,7 +20,7 @@ public class Employe implements Serializable, Comparable<Employe>
 	private Ligue ligue; 
 	private GestionPersonnel gestionPersonnel;
 	// insertion variable d'instance id
-	private int id;
+	private int idEmploye = -1;
 	// insertion variables localDate:
 	private LocalDate dateArrivee, dateDepart;
 	
@@ -30,7 +30,7 @@ public class Employe implements Serializable, Comparable<Employe>
 	Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom, String mail, String password, LocalDate dateArrivee, LocalDate dateDepart)throws SauvegardeImpossible
 	{
 		this(gestionPersonnel, -1, ligue, nom, prenom, mail, password, dateArrivee, dateDepart);
-		this.id = gestionPersonnel.insert(this);	
+		this.idEmploye = gestionPersonnel.insert(this);	
 	}
 	
 	//CONSTRUTEUR 2 quand les données sont déjà présentes dans la BDD:
@@ -45,7 +45,7 @@ public class Employe implements Serializable, Comparable<Employe>
 		this.password = password;
 		this.dateArrivee = dateArrivee;
 		this.dateDepart = dateDepart;
-		this.id = id;
+		this.idEmploye = id;
 	}
 
 	
@@ -75,6 +75,13 @@ public class Employe implements Serializable, Comparable<Employe>
 	{
 		return gestionPersonnel.getRoot() == this;
 	}
+	
+	//récupérer l'ID de l'employé:
+	public int getId()
+	{
+		return idEmploye;
+	}
+		//pas de setter car l'id reste fixe = LECTEUR SEULE
 	
 	/**
 	 * Retourne le nom de l'employé.
@@ -203,7 +210,7 @@ public class Employe implements Serializable, Comparable<Employe>
       
      /* modifie la date de départ de l'employé dans la ligue */
       
-	public void setDateDepart()
+	public void setDateDepart(LocalDate dateDepart)
 	{
 		this.dateDepart = dateDepart;
 		if (dateDepart.isAfter(dateDepart)) 

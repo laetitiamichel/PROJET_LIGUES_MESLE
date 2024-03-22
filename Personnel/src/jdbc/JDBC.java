@@ -37,12 +37,29 @@ public class JDBC implements Passerelle
 		GestionPersonnel gestionPersonnel = new GestionPersonnel();
 		try 
 		{
-			String requete = "select * from employe";
-			gestionPersonnel.addRoot("root","toor");
-			String requete = "select * from ligue";
+			//requête SQL pour récupérer le password de l'employé:
+			String requete = ("select * from employe where statut=2");
+			PreparedStatement selectInstruction = connection.prepareStatement(requete);
+			
+	        ResultSet result = selectInstruction.executeQuery();
+	        
+	        // Vérifier si l'employé existe dans la base de données
+	        if (result.next()) {
+	            // Comparer le mot de passe récupéré avec celui fourni
+	               // Si le mot de passe est correct, ajouter l'employé au gestionnaire du personnel
+	                gestionPersonnel.addRoot(result.getInt(1), result.getString(2),result.getString(5)); 
+	                // Ajouter l'employé avec son ID et son mot de passe
+	           
+	        } else {
+	        	gestionPersonnel.addRoot("root","toor");
+	        }
+	        
+			
+			String requete2 = "select * from ligue";
 			Statement instruction = connection.createStatement();
-			ResultSet ligues = instruction.executeQuery(requete);
+			ResultSet ligues = instruction.executeQuery(requete2);
 			while (ligues.next())
+				//pour charger une ligue: id et nom
 				gestionPersonnel.addLigue(ligues.getInt(1), ligues.getString(2));
 		}
 		catch (SQLException| SauvegardeImpossible e)
@@ -79,7 +96,7 @@ public class JDBC implements Passerelle
 		try 
 		{
 			PreparedStatement instruction;
-			instruction = connection.prepareStatement("insert into ligue (nom) values(?)", Statement.RETURN_GENERATED_KEYS);
+			instruction = connection.prepareStatement("insert into ligue (nomLigue) values(?)", Statement.RETURN_GENERATED_KEYS);
 			instruction.setString(1, ligue.getNom());		
 			instruction.executeUpdate();
 			ResultSet id = instruction.getGeneratedKeys();
@@ -99,8 +116,20 @@ public class JDBC implements Passerelle
 			try 
 			{
 				PreparedStatement instruction;
-				instruction = connection.prepareStatement("insert into employe (nom) values(?)", Statement.RETURN_GENERATED_KEYS);
+				instruction = connection.prepareStatement("insert into employe (nom,statut) values(?,?)", Statement.RETURN_GENERATED_KEYS);
 				instruction.setString(1, employe.getNom());		
+				//root=2 admin =1 user simple=0
+				//root n'a pas de ligue
+				if ( employe.getLigue()== null)
+					instruction.setInt(2,2);
+				else if ( employe.estAdmin(employe.getLigue())) {
+					instruction.setInt(2,1);
+				}
+				else {
+					instruction.setInt(2,0);
+				}
+			
+				
 				instruction.executeUpdate();
 				ResultSet id = instruction.getGeneratedKeys();
 				id.next();
@@ -133,6 +162,26 @@ public class JDBC implements Passerelle
 			}
 			
 		}
+		//rappel procédure de la classe passerelle:
+				@Override
+				public void update(Employe employe) throws SauvegardeImpossible 
+				{
+					try 
+					{
+						PreparedStatement instruction;
+						instruction = connection.prepareStatement("update employe set nom=? where id=?");
+						instruction.setString(1, employe.getNom());
+						instruction.setInt(2, employe.getId());
+						instruction.executeUpdate();
+						
+					} 
+					catch (SQLException exception) 
+					{
+						exception.printStackTrace();
+						throw new SauvegardeImpossible(exception);
+					}
+					
+				}
 	
 	
 }

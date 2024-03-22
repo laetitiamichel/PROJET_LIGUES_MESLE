@@ -134,6 +134,7 @@ public class GestionPersonnel implements Serializable
 	
 	//créer le root à partir de son nom et de son mot de passe,
 	//puis de l'affecter à la variable d'instance root de la classe GestionPersonnel.
+	// addRoot pour quand le root qui n'existe pas dans BDD
 	public Employe addRoot(String nom, String password) throws SauvegardeImpossible
 	{
 		//variable d'instance
@@ -143,5 +144,14 @@ public class GestionPersonnel implements Serializable
 		
 		return root;
 	}
-	//2e addRoot pour quand le root qui n'existe pas dans BDD
+	// addRoot pour quand le root qui existe dans BDD
+	public Employe addRoot(int id,String nom, String password)
+	{
+		//variable d'instance
+		root = new Employe(this,id, null, nom, "", "", password,null,null);
+		//pas d'opération d'écriture dans BDD car fait appel au constructeur 
+		//de JDBC pour récup valeurs
+		
+		return root;
+	}
 }

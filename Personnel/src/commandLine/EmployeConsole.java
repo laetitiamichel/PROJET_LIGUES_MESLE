@@ -34,8 +34,8 @@ public class EmployeConsole
 			menu.add(changerMail(employe));
 			menu.add(changerPassword(employe));
 			menu.add(nommerAdministrateur(ligue,employe));
-			menu.add(ajouterDateArrivee(employe, null));
-			menu.add(ajouterDateDepart(employe, null));
+			menu.add(ajouterDateArrivee(employe));
+			menu.add(ajouterDateDepart(employe));
 			menu.add(supprimerEmploye(ligue));
 			menu.addBack("q");
 			return menu;
@@ -81,7 +81,7 @@ public class EmployeConsole
 		}
 	
 		//AJOUTER UNE DATE ARRIVEE DE L'EMPLOYE:
-		private Option ajouterDateArrivee(final Employe employe, final LocalDate dateArrivee)
+		private Option ajouterDateArrivee(final Employe employe)
 	{
 			return new Option("Ajouter une date d'arrivée", "da", () -> { 
 						//instancier la variable date:
@@ -102,11 +102,22 @@ public class EmployeConsole
 	}
 			
 		//AJOUTER UNE DATE DE DEPART DE L'EMPLOYE:
-			private Option ajouterDateDepart(final Employe employe, final LocalDate dateArrivee)
+			private Option ajouterDateDepart(final Employe employe)
 			{
-				return new Option("Ajouter une date de départ", "dd", () -> {employe.setDateDepart();});
-				
-			}
+				return new Option("Ajouter une date de départ", "dd", () -> {
+					
+				try
+				{ 
+				LocalDate newDate = LocalDate.parse(getString("entrer la date:"));
+				employe.setDateDepart(newDate);
+				}
+			   
+				catch(IllegalArgumentException exception)
+				{
+					System.err.println("LA date d'arrivée doit être antérieure à la date de départ");
+				}
+			});
+		}
 	//SUPPRIMER EMPLOYE SELECTIONNE
 		private List<Employe> supprimerEmploye(final Ligue ligue)
 		{
