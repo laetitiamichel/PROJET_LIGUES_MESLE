@@ -24,7 +24,7 @@ public class GestionPersonnel implements Serializable
 	private static final long serialVersionUID = -105283113987886425L;
 	private static GestionPersonnel gestionPersonnel = null;
 	private SortedSet<Ligue> ligues;
-	private Employe root = new Employe(this, null, "root", "", "", "toor",null,null);
+	private Employe root;
 	public final static int SERIALIZATION = 1, JDBC = 2, 
 			TYPE_PASSERELLE = JDBC;  
 	private static Passerelle passerelle = TYPE_PASSERELLE == JDBC ? new jdbc.JDBC() : new serialisation.Serialization();	
@@ -131,4 +131,17 @@ public class GestionPersonnel implements Serializable
 	{
 		return root;
 	}
+	
+	//créer le root à partir de son nom et de son mot de passe,
+	//puis de l'affecter à la variable d'instance root de la classe GestionPersonnel.
+	public Employe addRoot(String nom, String password) throws SauvegardeImpossible
+	{
+		//variable d'instance
+		root = new Employe(this, null, nom, "", "", password,null,null);
+		//pas d'opération d'écriture dans BDD car fait appel au constructeur 
+		//de JDBC pour récup valeurs
+		
+		return root;
+	}
+	//2e addRoot pour quand le root qui n'existe pas dans BDD
 }

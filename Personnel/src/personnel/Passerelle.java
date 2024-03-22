@@ -9,5 +9,7 @@ public interface Passerelle
 	public int insert(Ligue ligue) throws SauvegardeImpossible;
 	//itération 3:
 	public int insert(Employe employe) throws SauvegardeImpossible;
+	//procédure update:
+	public void update(Ligue ligue) throws SauvegardeImpossible;
 	
 }

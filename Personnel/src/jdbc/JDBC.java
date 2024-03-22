@@ -32,18 +32,20 @@ public class JDBC implements Passerelle
 	}
 	
 	@Override
-	public GestionPersonnel getGestionPersonnel() 
+	public GestionPersonnel getGestionPersonnel()
 	{
 		GestionPersonnel gestionPersonnel = new GestionPersonnel();
 		try 
 		{
+			String requete = "select * from employe";
+			gestionPersonnel.addRoot("root","toor");
 			String requete = "select * from ligue";
 			Statement instruction = connection.createStatement();
 			ResultSet ligues = instruction.executeQuery(requete);
 			while (ligues.next())
 				gestionPersonnel.addLigue(ligues.getInt(1), ligues.getString(2));
 		}
-		catch (SQLException e)
+		catch (SQLException| SauvegardeImpossible e)
 		{
 			System.out.println(e);
 		}
@@ -91,6 +93,7 @@ public class JDBC implements Passerelle
 		}
 		
 	}
+		@Override
 		public int insert(Employe employe) throws SauvegardeImpossible 
 		{
 			try 
@@ -108,6 +111,27 @@ public class JDBC implements Passerelle
 				exception.printStackTrace();
 				throw new SauvegardeImpossible(exception);
 			}		
+		}
+		
+		//rappel procédure de la classe passerelle:
+		@Override
+		public void update(Ligue ligue) throws SauvegardeImpossible 
+		{
+			try 
+			{
+				PreparedStatement instruction;
+				instruction = connection.prepareStatement("update ligue set nom=? where id=?");
+				instruction.setString(1, ligue.getNom());
+				instruction.setInt(2, ligue.getId());
+				instruction.executeUpdate();
+				
+			} 
+			catch (SQLException exception) 
+			{
+				exception.printStackTrace();
+				throw new SauvegardeImpossible(exception);
+			}
+			
 		}
 	
 	

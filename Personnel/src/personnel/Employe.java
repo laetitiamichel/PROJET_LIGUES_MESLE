@@ -2,6 +2,7 @@ package personnel;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.TreeSet;
 
 /**
  * Employé d'une ligue hébergée par la M2L. Certains peuvent 
@@ -25,8 +26,17 @@ public class Employe implements Serializable, Comparable<Employe>
 	
 	
 	/* ici rajout de public pour pouvoir faire le test dans testligue */
-	Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom, String mail, String password, LocalDate dateArrivee, LocalDate dateDepart)
+	//CONSTRUTEUR pour création EMPLOYE
+	Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom, String mail, String password, LocalDate dateArrivee, LocalDate dateDepart)throws SauvegardeImpossible
 	{
+		this(gestionPersonnel, -1, ligue, nom, prenom, mail, password, dateArrivee, dateDepart);
+		this.id = gestionPersonnel.insert(this);	
+	}
+	
+	//CONSTRUTEUR 2 quand les données sont déjà présentes dans la BDD:
+	Employe(GestionPersonnel gestionPersonnel,  int id, Ligue ligue, String nom, String prenom, String mail, String password, LocalDate dateArrivee, LocalDate dateDepart)
+	{
+		this.nom = nom;
 		this.gestionPersonnel = gestionPersonnel;
 		this.ligue = ligue;
 		this.nom = nom;
@@ -35,8 +45,9 @@ public class Employe implements Serializable, Comparable<Employe>
 		this.password = password;
 		this.dateArrivee = dateArrivee;
 		this.dateDepart = dateDepart;
-		
+		this.id = id;
 	}
+
 	
 	/**
 	 * Retourne vrai si l'employé est administrateur de la ligue 

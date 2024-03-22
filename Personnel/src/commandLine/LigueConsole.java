@@ -134,12 +134,18 @@ public class LigueConsole
 		return new Option("ajouter un employé", "a",
 				() -> 
 				{
-					ligue.addEmploye(getString("nom : "), 
-						getString("prenom : "), 
-						getString("mail : "), 
-						getString("password : "), 
-						employeConsole.getDate("Date d'arrivée (format : YYYY-MM-DD) : "),
-						employeConsole.getDate("Date de départ (format : YYYY-MM-DD) : "));
+					try {
+						ligue.addEmploye(getString("nom : "), 
+							getString("prenom : "), 
+							getString("mail : "), 
+							getString("password : "), 
+							employeConsole.getDate("Date d'arrivée (format : YYYY-MM-DD) : "),
+							employeConsole.getDate("Date de départ (format : YYYY-MM-DD) : "));
+					} catch (SauvegardeImpossible e) {
+						// TODO Auto-generated catch block
+						System.out.println("erreur de la BDD");
+						e.printStackTrace();
+					}
 				}
 		);
 	}

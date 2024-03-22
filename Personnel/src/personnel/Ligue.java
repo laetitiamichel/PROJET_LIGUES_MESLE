@@ -27,13 +27,19 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	 * Crée une ligue.
 	 * @param nom le nom de la ligue.
 	 */
-	
+	//création ligue sans connaître l'id car pas encore dans BDD
+	//CONSTRUCTEUR 1 qui appelle CONSTRUCTEUR 2
 	Ligue(GestionPersonnel gestionPersonnel, String nom) throws SauvegardeImpossible
 	{
+		//constructeur avec this+()= SURCHARGE avec appel à JDBC de la BDD 
+		//-1 = ID temporaire 
 		this(gestionPersonnel, -1, nom);
-		this.id = gestionPersonnel.insert(this); 
+		this.id = gestionPersonnel.insert(this);  
+		//insert ligue dans BDD et valeur id récup par autoincrément
 	}
-
+	//charge ligue avec ID quand on lance l'appli donc 
+	//on créait objet de type ligue car on connait id dans BDD
+	//ici CONSTRUCTEUR 2:
 	Ligue(GestionPersonnel gestionPersonnel, int id, String nom)
 	{
 		this.nom = nom;
@@ -66,7 +72,14 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	/**
 	 * Retourne l'administrateur de la ligue.
 	 * @return l'administrateur de la ligue.
-	 */
+	 **/
+	
+	//récupérer l'ID de la ligue:
+	public int getId()
+	{
+		return id;
+	}
+	//pas de setter car l'id reste fixe = LECTEUR SEULE
 	
 	public Employe getAdministrateur()
 	{
@@ -110,7 +123,7 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	 */
 
 	//fonction pour rajouter un employé dans la ligue
-	public Employe addEmploye(String nom, String prenom, String mail, String password, LocalDate dateArrivee, LocalDate dateDepart)
+	public Employe addEmploye(String nom, String prenom, String mail, String password, LocalDate dateArrivee, LocalDate dateDepart)throws SauvegardeImpossible
 	{
 		Employe employe = new Employe(this.gestionPersonnel, this, nom, prenom, mail, password,dateArrivee,dateDepart);
 		employes.add(employe);
