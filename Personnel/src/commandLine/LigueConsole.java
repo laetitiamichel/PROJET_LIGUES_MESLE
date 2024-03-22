@@ -88,7 +88,13 @@ public class LigueConsole
 	private Option changerNom(final Ligue ligue)
 	{
 		return new Option("Renommer", "r", 
-				() -> {ligue.setNom(getString("Nouveau nom : "));});
+				() -> {try {
+					ligue.setNom(getString("Nouveau nom : "));
+				} catch (SauvegardeImpossible e) {
+					// TODO Auto-generated catch block
+					System.out.println("impossible d'écrire dans la base de données");
+					e.printStackTrace();
+				}});
 	}
 
 	//SUPPRIMER LIGUE
@@ -146,6 +152,12 @@ public class LigueConsole
 						System.out.println("erreur de la BDD");
 						e.printStackTrace();
 					}
+					//exception à rajouter dans la fenêtre
+				catch (IllegalArgumentException e) {
+					// TODO Auto-generated catch block
+					System.out.println("Date incohérante");
+					e.printStackTrace();
+				}
 				}
 		);
 	}

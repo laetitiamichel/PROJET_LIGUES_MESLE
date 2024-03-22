@@ -1,6 +1,7 @@
 package personnel;
 
 import java.io.Serializable;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.TreeSet;
 
@@ -99,9 +100,10 @@ public class Employe implements Serializable, Comparable<Employe>
 	 * @param nom le nouveau nom.
 	 */
 	
-	public void setNom(String nom)
+	public void setNom(String nom)throws SauvegardeImpossible
 	{
 		this.nom = nom;
+		gestionPersonnel.update(this);
 	}
 
 	/**
@@ -120,9 +122,11 @@ public class Employe implements Serializable, Comparable<Employe>
 	 * @param prenom le nouveau prénom de l'employé. 
 	 */
 
-	public void setPrenom(String prenom)
+	public void setPrenom(String prenom)throws SauvegardeImpossible
 	{
 		this.prenom = prenom;
+		gestionPersonnel.update(this);
+		
 	}
 
 	/**
@@ -141,9 +145,10 @@ public class Employe implements Serializable, Comparable<Employe>
 	 * @param mail le nouveau mail de l'employé.
 	 */
 
-	public void setMail(String mail)
+	public void setMail(String mail)throws SauvegardeImpossible
 	{
 		this.mail = mail;
+		gestionPersonnel.update(this);
 	}
 
 	/**
@@ -164,9 +169,10 @@ public class Employe implements Serializable, Comparable<Employe>
 	 * @param password le nouveau password de l'employé. 
 	 */
 	
-	public void setPassword(String password)
+	public void setPassword(String password)throws SauvegardeImpossible
 	{
 		this.password= password;
+		gestionPersonnel.update(this);
 	}
 
 	/**
@@ -188,15 +194,16 @@ public class Employe implements Serializable, Comparable<Employe>
 	}
 	
     /* modifie la date d'arrivée de l'employé dans la ligue */
-	public void setDateArrivee(LocalDate dateArrivee)
+	public void setDateArrivee(LocalDate dateArrivee)throws SauvegardeImpossible
 	{
-		
-		
-		if (dateArrivee.isAfter(dateDepart)) 
-		{
-	        throw new IllegalArgumentException("La date d'arrivée doit être antérieure à la date de départ.");
-	    }
+			
+		// Valider la date si nécessaire
+        if (dateArrivee != null && dateDepart != null && dateDepart.isBefore(dateArrivee)) {
+            throw new IllegalArgumentException("La date de départ ne peut pas être antérieure à la date d'arrivée.");
+        }
+ 
 		this.dateArrivee = dateArrivee;
+		gestionPersonnel.update(this);
 	}
 
 
@@ -210,17 +217,19 @@ public class Employe implements Serializable, Comparable<Employe>
       
      /* modifie la date de départ de l'employé dans la ligue */
       
-	public void setDateDepart(LocalDate dateDepart)
-	{
-		this.dateDepart = dateDepart;
-		if (dateDepart.isAfter(dateDepart)) 
-		{
-	        throw new IllegalArgumentException("La date de départ doit être postérieure à la date d'arrivée.");
-	    }
-	  
+      public void setDateDepart(LocalDate dateDepart)throws SauvegardeImpossible 
+      {
+   
+    	       
+    	        // Valider la date si nécessaire
+    	        if (dateArrivee != null && dateDepart != null && dateDepart.isBefore(dateArrivee)) {
+    	            throw new IllegalArgumentException("La date de départ ne peut pas être antérieure à la date d'arrivée.");
+    	        }
+    	        this.dateDepart = dateDepart;
+    	        gestionPersonnel.update(this);
+      
+    	    }
 		
-	}
-    
 
 
 	/* execeptions : */
