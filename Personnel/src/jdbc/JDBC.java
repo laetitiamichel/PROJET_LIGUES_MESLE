@@ -52,15 +52,21 @@ public class JDBC implements Passerelle
 	           
 	        } else {
 	        	gestionPersonnel.addRoot("root","toor");
-	        }
-	        
-			
+	        }		
 			String requete2 = "select * from ligue";
 			Statement instruction = connection.createStatement();
 			ResultSet ligues = instruction.executeQuery(requete2);
 			while (ligues.next())
 				//pour charger une ligue: id et nom
 				gestionPersonnel.addLigue(ligues.getInt(1), ligues.getString(2));
+			String requete3 = ("select * from employe where ID_ligue =?");
+			PreparedStatement selectInstruction3 = connection.prepareStatement(requete3);
+			selectInstruction3.setInt(1,ligues.getInt(1));
+			ResultSet result3 = selectInstruction3.executeQuery();
+			while (result3.next())
+			{
+				
+			}
 		}
 		catch (SQLException| SauvegardeImpossible e)
 		{

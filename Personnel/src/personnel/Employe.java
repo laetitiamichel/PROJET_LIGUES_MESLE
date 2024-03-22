@@ -219,8 +219,6 @@ public class Employe implements Serializable, Comparable<Employe>
       
       public void setDateDepart(LocalDate dateDepart)throws SauvegardeImpossible 
       {
-   
-    	       
     	        // Valider la date si nécessaire
     	        if (dateArrivee != null && dateDepart != null && dateDepart.isBefore(dateArrivee)) {
     	            throw new IllegalArgumentException("La date de départ ne peut pas être antérieure à la date d'arrivée.");

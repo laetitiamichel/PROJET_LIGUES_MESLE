@@ -45,26 +45,46 @@ public class EmployeConsole
 	private Option changerNom(final Employe employe)
 	{
 		return new Option("Changer le nom", "n", 
-				() -> {employe.setNom(getString("Nouveau nom : "));}
+				() -> {try {
+					employe.setNom(getString("Nouveau nom : "));
+				} catch (SauvegardeImpossible e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}}
 			);
 	}
 	
 	//CHANGER PRENOM EMPLOYE
 	private Option changerPrenom(final Employe employe)
 	{
-		return new Option("Changer le prénom", "p", () -> {employe.setPrenom(getString("Nouveau prénom : "));});
+		return new Option("Changer le prénom", "p", () -> {try {
+			employe.setPrenom(getString("Nouveau prénom : "));
+		} catch (SauvegardeImpossible e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}});
 	}
 	
 	//CHANGER MAIL EMPLOYE
 	private Option changerMail(final Employe employe)
 	{
-		return new Option("Changer le mail", "e", () -> {employe.setMail(getString("Nouveau mail : "));});
+		return new Option("Changer le mail", "e", () -> {try {
+			employe.setMail(getString("Nouveau mail : "));
+		} catch (SauvegardeImpossible e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}});
 	}
 	
 	//CHANGER PASSWORD EMPLOYE
 	private Option changerPassword(final Employe employe)
 	{
-		return new Option("Changer le password", "x", () -> {employe.setPassword(getString("Nouveau password : "));});
+		return new Option("Changer le password", "x", () -> {try {
+			employe.setPassword(getString("Nouveau password : "));
+		} catch (SauvegardeImpossible e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}});
 	}
 	
 	// permet de changer/nommer l'admin d'une ligue
@@ -77,6 +97,7 @@ public class EmployeConsole
 		
 		LocalDate getDate(String message)
 		{
+		
 			return LocalDate.parse(getString(message));
 		}
 	
@@ -87,7 +108,7 @@ public class EmployeConsole
 						//instancier la variable date:
 						//LocalDate localDate = LocalDate.parse("YYYY-MM-DD");  
 						//employe.setDateArrivee(dateArrivee);
-			try
+				try
 				{ 
 				LocalDate newDate = LocalDate.parse(getString("entrer la date:"));
 				employe.setDateArrivee(newDate);
@@ -95,8 +116,13 @@ public class EmployeConsole
 			   
 				catch(IllegalArgumentException exception)
 				{
-					System.err.println("LA date d'arrivée doit être antérieure à la date de départ");
+					System.err.println("La date d'arrivée doit être antérieure à la date de départ");
 				}
+				catch(SauvegardeImpossible exception)
+				{
+					System.err.println("problème dans la BDD");
+				}
+			
 			});
 			
 	}
@@ -114,7 +140,11 @@ public class EmployeConsole
 			   
 				catch(IllegalArgumentException exception)
 				{
-					System.err.println("LA date d'arrivée doit être antérieure à la date de départ");
+					System.err.println("La date d'arrivée doit être antérieure à la date de départ");
+				}
+				catch(SauvegardeImpossible exception)
+				{
+					System.err.println("problème dans la BDD");
 				}
 			});
 		}
