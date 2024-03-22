@@ -14,7 +14,14 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+
+-- Listage de la structure de la base pour proj_ligues
+DROP DATABASE IF EXISTS `proj_ligues`;
+CREATE DATABASE IF NOT EXISTS `proj_ligues` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `proj_ligues`;
+
 -- Listage de la structure de table proj_ligues. employe
+DROP TABLE IF EXISTS `employe`;
 CREATE TABLE IF NOT EXISTS `employe` (
   `ID_employe` int NOT NULL AUTO_INCREMENT,
   `nom` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
@@ -23,22 +30,23 @@ CREATE TABLE IF NOT EXISTS `employe` (
   `password` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT '',
   `dateArrivee` date DEFAULT NULL,
   `dateDepart` date DEFAULT NULL,
-  `statut` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT '',
+  `statut` int DEFAULT NULL,
   `ID_ligue` int DEFAULT NULL,
-  PRIMARY KEY (`ID_employe`),
-  KEY `fk_nomLigue` (`ID_ligue`),
-  CONSTRAINT `fk_nomLigue` FOREIGN KEY (`ID_ligue`) REFERENCES `ligue` (`ID_ligue`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`ID_employe`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Les données exportées n'étaient pas sélectionnées.
 
 -- Listage de la structure de table proj_ligues. ligue
+DROP TABLE IF EXISTS `ligue`;
 CREATE TABLE IF NOT EXISTS `ligue` (
   `ID_ligue` int NOT NULL AUTO_INCREMENT,
   `nomLigue` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`ID_ligue`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+-- Ajout de la contrainte de clé étrangère pour proj_ligues.employe
+ALTER TABLE `employe`
+ADD CONSTRAINT `fk_nomLigue` FOREIGN KEY (`ID_ligue`) REFERENCES `ligue` (`ID_ligue`);
 -- Les données exportées n'étaient pas sélectionnées.
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
