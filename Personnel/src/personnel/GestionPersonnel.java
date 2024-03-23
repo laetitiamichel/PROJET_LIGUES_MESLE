@@ -111,7 +111,10 @@ public class GestionPersonnel implements Serializable
 	{
 		ligues.remove(ligue);
 	}
-	
+	void remove(Employe employe)
+	{
+		employe.remove();
+	}
 	//itération 3 
 	int insert(Ligue ligue) throws SauvegardeImpossible
 	{

@@ -48,7 +48,7 @@ public class JDBC implements Passerelle
 	            // Comparer le mot de passe récupéré avec celui fourni
 	               // Si le mot de passe est correct, ajouter l'employé au gestionnaire du personnel
 	                gestionPersonnel.addRoot(result.getInt(1), result.getString(2),result.getString(5)); 
-	                // Ajouter l'employé avec son ID et son mot de passe
+	                // Ajouter l'employé avec son ID,nom et son mot de passe
 	           
 	        } else {
 	        	gestionPersonnel.addRoot("root","toor");
@@ -57,21 +57,35 @@ public class JDBC implements Passerelle
 			Statement instruction = connection.createStatement();
 			ResultSet ligues = instruction.executeQuery(requete2);
 			while (ligues.next())
-				//pour charger une ligue: id et nom
+				//pour charger une ligue: id et nom et ajouter chaque ligue à la gestion du personnel
 				gestionPersonnel.addLigue(ligues.getInt(1), ligues.getString(2));
+			
+			//permet de lire dans la BDD les employés de la ligue et récup les employés de cette ligue
 			String requete3 = ("select * from employe where ID_ligue =?");
 			PreparedStatement selectInstruction3 = connection.prepareStatement(requete3);
 			selectInstruction3.setInt(1,ligues.getInt(1));
 			ResultSet result3 = selectInstruction3.executeQuery();
-			while (result3.next())
-			{
-				
-			}
-		}
-		catch (SQLException| SauvegardeImpossible e)
-		{
-			System.out.println(e);
-		}
+			
+					// Parcourir les ligues
+			        while (result3.next())
+			            // Ajouter chaque ligue à la gestion du personnel
+			            gestionPersonnel.addLigue(ligues.getInt("ID_ligue"), ligues.getString("nomLigue"));
+
+			            // Requête SQL pour récupérer les employés de cette ligue
+			            String requeteEmployes = "SELECT * FROM employe WHERE ID_ligue = ?";
+			            PreparedStatement selectInstructionEmployes = connection.prepareStatement(requeteEmployes);
+			            selectInstructionEmployes.setInt(1, ligues.getInt("ID_ligue"));
+			            ResultSet employes = selectInstructionEmployes.executeQuery();
+			            Employe employe = new employe.gestionPersonnel()
+			           
+			              
+			         while (employes.next());
+			}	
+
+				catch (SQLException| SauvegardeImpossible e)
+				{
+					System.out.println(e);
+				}
 		return gestionPersonnel;
 	}
 
@@ -188,6 +202,46 @@ public class JDBC implements Passerelle
 					}
 					
 				}
+				@Override
+				public void remove(Employe employe) throws SauvegardeImpossible 
+				{
+					try 
+					{
+						PreparedStatement instruction;
+						instruction = connection.prepareStatement("delete from employe where id=?");
+						instruction.setString(1, employe.getNom());
+						instruction.setInt(2, employe.getId());
+						instruction.execute();
+						
+					} 
+					catch (SQLException exception) 
+					{
+						exception.printStackTrace();
+						throw new SauvegardeImpossible(exception);
+					}
+					
+				}
+				@Override
+				public void remove(Ligue ligue) throws SauvegardeImpossible 
+				{
+					try 
+					{
+						PreparedStatement instruction;
+						instruction = connection.prepareStatement("delete from ligue where id=?");
+						instruction = connection.prepareStatement("delete from employe where id=?");
+						instruction.setString(1, ligue.getNom());
+						instruction.setInt(2, ligue.getId());
+						instruction.execute();
+						
+					} 
+					catch (SQLException exception) 
+					{
+						exception.printStackTrace();
+						throw new SauvegardeImpossible(exception);
+					}
+					
+				}
+	
 	
 	
 }
