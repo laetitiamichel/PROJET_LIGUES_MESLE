@@ -151,7 +151,7 @@ public class GestionPersonnel implements Serializable
 	public Employe addRoot(int id,String nom, String password)
 	{
 		//variable d'instance
-		root = new Employe(this,id, null, nom, "", "", password,null,null);
+		root = new Employe(this,id, null, nom, "", "", password,null,null,2);
 		//pas d'opération d'écriture dans BDD car fait appel au constructeur 
 		//de JDBC pour récup valeurs
 		
@@ -167,6 +167,11 @@ public class GestionPersonnel implements Serializable
 	void update(Employe employe)throws SauvegardeImpossible
 	{
 		 passerelle.update(employe);
+	}
+	// update ADMIN
+	void updateStatut(Employe employe)throws SauvegardeImpossible
+	{
+		 passerelle.updateStatut(employe);
 	}
 	
 }

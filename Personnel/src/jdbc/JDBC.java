@@ -186,7 +186,7 @@ public class JDBC implements Passerelle
 			try 
 			{
 				PreparedStatement instruction;
-				instruction = connection.prepareStatement("update ligue set nom=? where id=?");
+				instruction = connection.prepareStatement("update ligue set nom=? where ID_ligue=?");
 				instruction.setString(1, ligue.getNom());
 				instruction.setInt(2, ligue.getId());
 				instruction.executeUpdate();
@@ -206,7 +206,7 @@ public class JDBC implements Passerelle
 					try 
 					{
 						PreparedStatement instruction;
-						instruction = connection.prepareStatement("update employe set nom=? where id=?");
+						instruction = connection.prepareStatement("update employe set nom=? where ID_employe=?");
 						instruction.setString(1, employe.getNom());
 						instruction.setInt(2, employe.getId());
 						instruction.executeUpdate();
@@ -219,6 +219,46 @@ public class JDBC implements Passerelle
 					}
 					
 				}
+				
+				@Override
+				public void updateStatut(Employe employe) {
+				    try {
+				        // Début de la transaction
+				        connection.setAutoCommit(false);
+				        
+				        // Mettre à jour le statut de l'ancien administrateur
+				        String requeteAncienAdmin = "UPDATE employe SET statut = 1 WHERE ID_employe = ?";
+				        PreparedStatement updateAncienAdmin = connection.prepareStatement(requeteAncienAdmin);
+				        updateAncienAdmin.setInt(1, employe.getStatut()); 
+				        updateAncienAdmin.setInt(2, employe.getId());
+				        updateAncienAdmin.executeUpdate();
+				        
+				        // Mettre à jour le statut du nouveau administrateur
+				        String requeteNouveauAdmin = "UPDATE employe SET statut = ? WHERE ID_employe = ?";
+				        PreparedStatement updateNouveauAdmin = connection.prepareStatement(requeteNouveauAdmin);
+				        updateNouveauAdmin.setInt(1, employe.getStatut()); 
+				        updateNouveauAdmin.setInt(2, employe.getId());
+				        updateNouveauAdmin.executeUpdate();
+				        
+				        // Valider la transaction
+				        connection.commit();
+				        
+				        // Fin de la transaction
+				        connection.setAutoCommit(true);
+				        
+				        System.out.println("Changement d'administrateur enregistré avec succès.");
+				    } catch (SQLException e) {
+				        try {
+				            // Annuler la transaction en cas d'erreur
+				            connection.rollback();
+				        } catch (SQLException rollbackError) {
+				            rollbackError.printStackTrace();
+				        }
+				        e.printStackTrace();
+				    }
+				}
+				
+				
 				@Override
 				public void remove(Employe employe) throws SauvegardeImpossible 
 				{

@@ -12,6 +12,7 @@ public interface Passerelle
 	//procédure update:
 	public void update(Ligue ligue) throws SauvegardeImpossible;
 	public void update(Employe employe) throws SauvegardeImpossible;
+	public void updateStatut(Employe employe) throws SauvegardeImpossible;
 	public void remove(Employe employe) throws SauvegardeImpossible;
 	public void remove(Ligue ligue) throws SauvegardeImpossible;
 	
