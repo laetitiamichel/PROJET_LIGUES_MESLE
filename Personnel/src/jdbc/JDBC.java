@@ -37,22 +37,39 @@ public class JDBC implements Passerelle
 		GestionPersonnel gestionPersonnel = new GestionPersonnel();
 		try 
 		{
-			//requête SQL pour récupérer le password de l'employé:
-			String requete = ("select * from employe where statut=2");
-			PreparedStatement selectInstruction = connection.prepareStatement(requete);
-			
+			// Requête SQL pour récupérer les employés avec le statut d'administrateur
+	        String requete = "SELECT * FROM employe WHERE statut = 1";
+	        PreparedStatement selectInstruction = connection.prepareStatement(requete);
 	        ResultSet result = selectInstruction.executeQuery();
+
+	        // Vérifier si des employés administrateurs existent dans la base de données
+	        if (result.next()) {
+	            // Ajouter chaque employé administrateur au gestionnaire du personnel
+	            do {
+	                gestionPersonnel.addRoot(result.getInt("ID_employe"), result.getString("nom"), result.getString("password"));
+	            } while (result.next());
+	        } else {
+	            // Si aucun employé administrateur n'est trouvé, ajouter un administrateur par défaut
+	            gestionPersonnel.addRoot("root", "toor");
+	        }
+	        
+			//requête SQL pour récupérer le password de l'employé:
+			String requeteStatut = ("select * from employe where statut=2");
+			PreparedStatement selectInstructionStatut = connection.prepareStatement(requeteStatut);
+			
+	        ResultSet resultStatut = selectInstructionStatut.executeQuery();
 	        
 	        // Vérifier si l'employé existe dans la base de données
-	        if (result.next()) {
+	        if (resultStatut.next()) {
 	            // Comparer le mot de passe récupéré avec celui fourni
 	               // Si le mot de passe est correct, ajouter l'employé au gestionnaire du personnel
-	                gestionPersonnel.addRoot(result.getInt(1), result.getString(2),result.getString(5)); 
+	                gestionPersonnel.addRoot(resultStatut.getInt(1), resultStatut.getString(2),resultStatut.getString(5)); 
 	                // Ajouter l'employé avec son ID,nom et son mot de passe
 	           
 	        } else {
 	        	gestionPersonnel.addRoot("root","toor");
-	        }		
+	        }
+	        
 			String requete2 = "select * from ligue";
 			Statement instruction = connection.createStatement();
 			ResultSet ligues = instruction.executeQuery(requete2);
@@ -76,7 +93,7 @@ public class JDBC implements Passerelle
 			            PreparedStatement selectInstructionEmployes = connection.prepareStatement(requeteEmployes);
 			            selectInstructionEmployes.setInt(1, ligues.getInt("ID_ligue"));
 			            ResultSet employes = selectInstructionEmployes.executeQuery();
-			            Employe employe = new employe.gestionPersonnel()
+			            //Employe employe= new employe.gestionPersonnel()
 			           
 			              
 			         while (employes.next());
