@@ -223,8 +223,6 @@ public class JDBC implements Passerelle
 				@Override
 				public void updateStatut(Employe employe) {
 				    try {
-				        // Début de la transaction
-				        connection.setAutoCommit(false);
 				        
 				        // Mettre à jour le statut de l'ancien administrateur
 				        String requeteAncienAdmin = "UPDATE employe SET statut = 1 WHERE ID_employe = ?";
@@ -265,7 +263,7 @@ public class JDBC implements Passerelle
 					try 
 					{
 						PreparedStatement instruction;
-						instruction = connection.prepareStatement("delete from employe where id=?");
+						instruction = connection.prepareStatement("delete from employe where ID_employe=?");
 						instruction.setString(1, employe.getNom());
 						instruction.setInt(2, employe.getId());
 						instruction.execute();
@@ -284,8 +282,8 @@ public class JDBC implements Passerelle
 					try 
 					{
 						PreparedStatement instruction;
-						instruction = connection.prepareStatement("delete from ligue where id=?");
-						instruction = connection.prepareStatement("delete from employe where id=?");
+						instruction = connection.prepareStatement("delete from ligue where ID_ligue=?");
+						instruction = connection.prepareStatement("delete from employe where ID_ligue=?");
 						instruction.setString(1, ligue.getNom());
 						instruction.setInt(2, ligue.getId());
 						instruction.execute();

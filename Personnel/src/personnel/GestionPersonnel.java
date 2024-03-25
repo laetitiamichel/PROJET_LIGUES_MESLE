@@ -141,7 +141,7 @@ public class GestionPersonnel implements Serializable
 	public Employe addRoot(String nom, String password) throws SauvegardeImpossible
 	{
 		//variable d'instance
-		root = new Employe(this, null, nom, "", "", password,null,null);
+		root = new Employe(this, null, nom, "", "", password,null,null,2);
 		//pas d'opération d'écriture dans BDD car fait appel au constructeur 
 		//de JDBC pour récup valeurs
 		
