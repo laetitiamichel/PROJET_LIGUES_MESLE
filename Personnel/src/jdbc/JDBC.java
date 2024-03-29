@@ -36,68 +36,73 @@ public class JDBC implements Passerelle
 	{
 		GestionPersonnel gestionPersonnel = new GestionPersonnel();
 		try 
-		{
-			// Requête SQL pour récupérer les employés avec le statut d'administrateur
-	        String requete = "SELECT * FROM employe WHERE statut = 1";
-	        PreparedStatement selectInstruction = connection.prepareStatement(requete);
-	        ResultSet result = selectInstruction.executeQuery();
-
-	        // Vérifier si des employés administrateurs existent dans la base de données
-	        if (result.next()) {
-	            // Ajouter chaque employé administrateur au gestionnaire du personnel
-	            do {
-	                gestionPersonnel.addRoot(result.getInt("ID_employe"), result.getString("nom"), result.getString("password"));
-	            } while (result.next());
-	        } else {
-	            // Si aucun employé administrateur n'est trouvé, ajouter un administrateur par défaut
-	            gestionPersonnel.addRoot("root", "toor");
-	        }
+		{   
+			//requête SQL pour récupérer l'employé qui est ROOT / statut=2:
+			String requeteRecupRoot = ("select * from employe where statut=2");
+			PreparedStatement selectInstructionRecupRoot = connection.prepareStatement(requeteRecupRoot);		
+	        ResultSet resultRecupRoot = selectInstructionRecupRoot.executeQuery();
 	        
-			//requête SQL pour récupérer le password de l'employé:
-			String requeteStatut = ("select * from employe where statut=2");
-			PreparedStatement selectInstructionStatut = connection.prepareStatement(requeteStatut);
-			
-	        ResultSet resultStatut = selectInstructionStatut.executeQuery();
-	        
-	        // Vérifier si l'employé existe dans la base de données
-	        if (resultStatut.next()) {
+	        // Vérifier si le ROOT statut=2 existe dans la base de données
+	        if (resultRecupRoot.next()) {
 	            // Comparer le mot de passe récupéré avec celui fourni
-	               // Si le mot de passe est correct, ajouter l'employé au gestionnaire du personnel
-	                gestionPersonnel.addRoot(resultStatut.getInt(1), resultStatut.getString(2),resultStatut.getString(5)); 
-	                // Ajouter l'employé avec son ID,nom et son mot de passe
+	            // Si le mot de passe est correct, ajouter l'employé au gestionnaire du personnel
+	        	// Ajouter le ROOT avec son ID=getInt1,nom getString2 et son mot de passe getString(5)
+	                gestionPersonnel.addRoot(resultRecupRoot.getInt(1), resultRecupRoot.getString(2),resultRecupRoot.getString(5)); 
+	                
 	           
 	        } else {
 	        	gestionPersonnel.addRoot("root","toor");
 	        }
 	        
-			String requete2 = "select * from ligue";
-			Statement instruction = connection.createStatement();
-			ResultSet ligues = instruction.executeQuery(requete2);
-			while (ligues.next())
+	        
+	        while() {
+	        // on sélection l'employé avec l'ID de la ligue = id_ligue ( clé étrangère)
+	        //permet de lire dans la BDD les employés de la ligue et récup les employés de cette ligue
+			String requeteEmployes = ("select * from employe where ID_ligue =?");
+			Statement selectInstructionEmployes = connection.prepareStatement(requeteEmployes);
+			//selectInstructionEmployes.setInt(1, ligue.getInt(9));
+			ResultSet resultEmployes = selectInstructionEmployes.executeQuery(requeteEmployes);
+			
+			
+			String requeteLigues = "select * from ligue where ID_ligue = ?";
+			Statement instructionLigues = connection.createStatement();
+			ResultSet resultLigues = instructionLigues.executeQuery(requeteLigues);
+			
+			
+			
+			while (resultEmployes.next()){
+				
 				//pour charger une ligue: id et nom et ajouter chaque ligue à la gestion du personnel
-				gestionPersonnel.addLigue(ligues.getInt(1), ligues.getString(2));
+				Ligue.addEmploye(
+						
+						resultEmployes.getString(2), //nom
+						resultEmployes.getString(3), //prenom
+						resultEmployes.getString(4), //mail
+						resultEmployes.getString(5), //password
+						resultEmployes.getDate(6), //datearrivee
+						resultEmployes.getDate(7), //datedepart
+						resultEmployes.getInt(1) //ID
+						);
+				int ID_employe = resultEmployes.getInt("ID_employe");
+				//gestionPersonnel.employe = ligue.addEmploye("ID_employe", "nom", "prenom", "mail", "password", "dateArrive", "dateDepart");
+				gestionPersonnel.addRoot(resultRecupRoot.getInt(1), resultRecupRoot.getString(2),resultRecupRoot.getString(5)); 
+					
+				if(resultRecupRoot = 2) {
+						int isAdmin = resultRecupRoot.getInt(ID_employe);
+							if( ID_employe = isAdmin){
+								Ligue.setAdministrateur(employe);
+								}
+							}
+					resultEmployes.close();
+					selectInstructionEmployes.close();
+					resultLigues.close();
+					instructionLigues.close();
+					
+				}
+	        }
+	        }
 			
-			//permet de lire dans la BDD les employés de la ligue et récup les employés de cette ligue
-			String requete3 = ("select * from employe where ID_ligue =?");
-			PreparedStatement selectInstruction3 = connection.prepareStatement(requete3);
-			selectInstruction3.setInt(1,ligues.getInt(1));
-			ResultSet result3 = selectInstruction3.executeQuery();
-			
-					// Parcourir les ligues
-			        while (result3.next())
-			            // Ajouter chaque ligue à la gestion du personnel
-			            gestionPersonnel.addLigue(ligues.getInt("ID_ligue"), ligues.getString("nomLigue"));
-
-			            // Requête SQL pour récupérer les employés de cette ligue
-			            String requeteEmployes = "SELECT * FROM employe WHERE ID_ligue = ?";
-			            PreparedStatement selectInstructionEmployes = connection.prepareStatement(requeteEmployes);
-			            selectInstructionEmployes.setInt(1, ligues.getInt("ID_ligue"));
-			            ResultSet employes = selectInstructionEmployes.executeQuery();
-			            //Employe employe= new employe.gestionPersonnel()
-			           
-			              
-			         while (employes.next());
-			}	
+					
 
 				catch (SQLException| SauvegardeImpossible e)
 				{
@@ -220,41 +225,6 @@ public class JDBC implements Passerelle
 					
 				}
 				
-				@Override
-				public void updateStatut(Employe employe) {
-				    try {
-				        
-				        // Mettre à jour le statut de l'ancien administrateur
-				        String requeteAncienAdmin = "UPDATE employe SET statut = 1 WHERE ID_employe = ?";
-				        PreparedStatement updateAncienAdmin = connection.prepareStatement(requeteAncienAdmin);
-				        updateAncienAdmin.setInt(1, employe.getStatut()); 
-				        updateAncienAdmin.setInt(2, employe.getId());
-				        updateAncienAdmin.executeUpdate();
-				        
-				        // Mettre à jour le statut du nouveau administrateur
-				        String requeteNouveauAdmin = "UPDATE employe SET statut = ? WHERE ID_employe = ?";
-				        PreparedStatement updateNouveauAdmin = connection.prepareStatement(requeteNouveauAdmin);
-				        updateNouveauAdmin.setInt(1, employe.getStatut()); 
-				        updateNouveauAdmin.setInt(2, employe.getId());
-				        updateNouveauAdmin.executeUpdate();
-				        
-				        // Valider la transaction
-				        connection.commit();
-				        
-				        // Fin de la transaction
-				        connection.setAutoCommit(true);
-				        
-				        System.out.println("Changement d'administrateur enregistré avec succès.");
-				    } catch (SQLException e) {
-				        try {
-				            // Annuler la transaction en cas d'erreur
-				            connection.rollback();
-				        } catch (SQLException rollbackError) {
-				            rollbackError.printStackTrace();
-				        }
-				        e.printStackTrace();
-				    }
-				}
 				
 				
 				@Override
@@ -282,8 +252,9 @@ public class JDBC implements Passerelle
 					try 
 					{
 						PreparedStatement instruction;
-						instruction = connection.prepareStatement("delete from ligue where ID_ligue=?");
 						instruction = connection.prepareStatement("delete from employe where ID_ligue=?");
+						instruction = connection.prepareStatement("delete from ligue where ID_ligue=?");
+						
 						instruction.setString(1, ligue.getNom());
 						instruction.setInt(2, ligue.getId());
 						instruction.execute();

@@ -146,8 +146,8 @@ public class LigueConsole
 							getString("mail : "), 
 							getString("password : "), 
 							employeConsole.getDate("Date d'arrivée (format : YYYY-MM-DD) : "),
-							employeConsole.getDate("Date de départ (format : YYYY-MM-DD) : "),
-							getInt("statut:"));
+							employeConsole.getDate("Date de départ (format : YYYY-MM-DD) : ")
+							);
 					} catch (SauvegardeImpossible e) {
 						// TODO Auto-generated catch block
 						System.out.println("erreur de la BDD");

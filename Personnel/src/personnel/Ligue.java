@@ -124,9 +124,9 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	 */
 
 	//fonction pour rajouter un employé dans la ligue
-	public Employe addEmploye(String nom, String prenom, String mail, String password, LocalDate dateArrivee, LocalDate dateDepart, int statut)throws SauvegardeImpossible
+	public Employe addEmploye(String nom, String prenom, String mail, String password, LocalDate dateArrivee, LocalDate dateDepart)throws SauvegardeImpossible
 	{
-		Employe employe = new Employe(this.gestionPersonnel, this, nom, prenom, mail, password,dateArrivee,dateDepart, statut);
+		Employe employe = new Employe(this.gestionPersonnel, this, nom, prenom, mail, password,dateArrivee,dateDepart);
 		employes.add(employe);
 		return employe;
 	}
@@ -143,6 +143,7 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	
 	public void remove()
 	{
+		//mettre un boucle qui supprime tous les employés de la ligue => appel à la méthode employe.remove
 		gestionPersonnel.remove(this);
 	}
 	
