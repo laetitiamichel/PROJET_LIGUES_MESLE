@@ -73,9 +73,16 @@ public class PersonnelConsole
 	
 	public static void main(String[] args)
 	{
-		PersonnelConsole personnelConsole = 
-				new PersonnelConsole(GestionPersonnel.getGestionPersonnel());
+		PersonnelConsole personnelConsole;
+		try {
+			personnelConsole = new PersonnelConsole(GestionPersonnel.getGestionPersonnel());
+		
 		if (personnelConsole.verifiePassword())
 			personnelConsole.start();
+		}catch (SauvegardeImpossible e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("impossible d'accéder à la base de données");
+		}
 	}
 }

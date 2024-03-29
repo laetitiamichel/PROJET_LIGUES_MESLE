@@ -24,19 +24,18 @@ public class Employe implements Serializable, Comparable<Employe>
 	private int idEmploye = -1;
 	// insertion variables localDate:
 	private LocalDate dateArrivee, dateDepart;
-	private int statut;
 	
 	
 	/* ici rajout de public pour pouvoir faire le test dans testligue */
 	//CONSTRUTEUR pour création EMPLOYE
-	Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom, String mail, String password, LocalDate dateArrivee, LocalDate dateDepart, int statut)throws SauvegardeImpossible
+	Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom, String mail, String password, LocalDate dateArrivee, LocalDate dateDepart)throws SauvegardeImpossible
 	{
-		this(gestionPersonnel, -1, ligue, nom, prenom, mail, password, dateArrivee, dateDepart, statut);
+		this(gestionPersonnel, -1, ligue, nom, prenom, mail, password, dateArrivee, dateDepart);
 		this.idEmploye = gestionPersonnel.insert(this);	
 	}
 	
 	//CONSTRUTEUR 2 quand les données sont déjà présentes dans la BDD:
-	Employe(GestionPersonnel gestionPersonnel,  int id, Ligue ligue, String nom, String prenom, String mail, String password, LocalDate dateArrivee, LocalDate dateDepart, int statut)
+	Employe(GestionPersonnel gestionPersonnel,  int id, Ligue ligue, String nom, String prenom, String mail, String password, LocalDate dateArrivee, LocalDate dateDepart)
 	{
 		this.nom = nom;
 		this.gestionPersonnel = gestionPersonnel;
@@ -48,7 +47,6 @@ public class Employe implements Serializable, Comparable<Employe>
 		this.dateArrivee = dateArrivee;
 		this.dateDepart = dateDepart;
 		this.idEmploye = id;
-		this.statut = statut;
 	}
 
 	
@@ -67,17 +65,6 @@ public class Employe implements Serializable, Comparable<Employe>
 		return ligue.getAdministrateur() == this;
 	}
 
-	/*STATUT employe*/
-	public int getStatut()
-	{
-		return statut;
-	}
-	
-	public void setStatut(int statut)throws SauvegardeImpossible
-	{
-		this.statut = statut;
-		gestionPersonnel.update(this);
-	}
 
 	/**
 	 * Retourne vrai ssi l'employé est le root.

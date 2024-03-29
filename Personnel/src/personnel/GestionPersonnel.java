@@ -35,9 +35,10 @@ public class GestionPersonnel implements Serializable
 	 * Retourne l'unique instance de cette classe.
 	 * Crée cet objet s'il n'existe déjà.
 	 * @return l'unique objet de type {@link GestionPersonnel}.
+	 * @throws SauvegardeImpossible 
 	 */
 	
-	public static GestionPersonnel getGestionPersonnel()
+	public static GestionPersonnel getGestionPersonnel() throws SauvegardeImpossible
 	{
 		if (gestionPersonnel == null)
 		{
@@ -141,7 +142,7 @@ public class GestionPersonnel implements Serializable
 	public Employe addRoot(String nom, String password) throws SauvegardeImpossible
 	{
 		//variable d'instance
-		root = new Employe(this, null, nom, "", "", password,null,null,2);
+		root = new Employe(this, null, nom, "", "", password,null,null);
 		//pas d'opération d'écriture dans BDD car fait appel au constructeur 
 		//de JDBC pour récup valeurs
 		
@@ -151,7 +152,7 @@ public class GestionPersonnel implements Serializable
 	public Employe addRoot(int id,String nom, String password)
 	{
 		//variable d'instance
-		root = new Employe(this,id, null, nom, "", "", password,null,null,2);
+		root = new Employe(this,id, null, nom, "", "", password,null,null);
 		//pas d'opération d'écriture dans BDD car fait appel au constructeur 
 		//de JDBC pour récup valeurs
 		
@@ -168,10 +169,6 @@ public class GestionPersonnel implements Serializable
 	{
 		 passerelle.update(employe);
 	}
-	// update ADMIN
-	void updateStatut(Employe employe)throws SauvegardeImpossible
-	{
-		 passerelle.updateStatut(employe);
-	}
+
 	
 }

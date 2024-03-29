@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 
 import personnel.*;
 
@@ -30,9 +31,9 @@ public class JDBC implements Passerelle
 			System.out.println(e);
 		}
 	}
-	
+
 	@Override
-	public GestionPersonnel getGestionPersonnel()
+	public GestionPersonnel getGestionPersonnel() throws SauvegardeImpossible
 	{
 		GestionPersonnel gestionPersonnel = new GestionPersonnel();
 		try 
@@ -40,75 +41,64 @@ public class JDBC implements Passerelle
 			//requête SQL pour récupérer l'employé qui est ROOT / statut=2:
 			String requeteRecupRoot = ("select * from employe where statut=2");
 			PreparedStatement selectInstructionRecupRoot = connection.prepareStatement(requeteRecupRoot);		
-	        ResultSet resultRecupRoot = selectInstructionRecupRoot.executeQuery();
-	        
-	        // Vérifier si le ROOT statut=2 existe dans la base de données
-	        if (resultRecupRoot.next()) {
-	            // Comparer le mot de passe récupéré avec celui fourni
-	            // Si le mot de passe est correct, ajouter l'employé au gestionnaire du personnel
-	        	// Ajouter le ROOT avec son ID=getInt1,nom getString2 et son mot de passe getString(5)
-	                gestionPersonnel.addRoot(resultRecupRoot.getInt(1), resultRecupRoot.getString(2),resultRecupRoot.getString(5)); 
-	                
-	           
-	        } else {
-	        	gestionPersonnel.addRoot("root","toor");
-	        }
-	        
-	        
-	        while() {
-	        // on sélection l'employé avec l'ID de la ligue = id_ligue ( clé étrangère)
-	        //permet de lire dans la BDD les employés de la ligue et récup les employés de cette ligue
-			String requeteEmployes = ("select * from employe where ID_ligue =?");
-			Statement selectInstructionEmployes = connection.prepareStatement(requeteEmployes);
-			//selectInstructionEmployes.setInt(1, ligue.getInt(9));
-			ResultSet resultEmployes = selectInstructionEmployes.executeQuery(requeteEmployes);
-			
-			
-			String requeteLigues = "select * from ligue where ID_ligue = ?";
-			Statement instructionLigues = connection.createStatement();
-			ResultSet resultLigues = instructionLigues.executeQuery(requeteLigues);
-			
-			
-			
-			while (resultEmployes.next()){
-				
-				//pour charger une ligue: id et nom et ajouter chaque ligue à la gestion du personnel
-				Employes.addEmploye(
-						
-						resultEmployes.getString(2), //nom
-						resultEmployes.getString(3), //prenom
-						resultEmployes.getString(4), //mail
-						resultEmployes.getString(5), //password
-						resultEmployes.getDate(6), //datearrivee
-						resultEmployes.getDate(7), //datedepart
-						resultEmployes.getInt(1) //ID
-						);
-				int ID_employe = resultEmployes.getInt("ID_employe");
-				//gestionPersonnel.employe = ligue.addEmploye("ID_employe", "nom", "prenom", "mail", "password", "dateArrive", "dateDepart");
-				gestionPersonnel.addRoot(resultRecupRoot.getInt(1), resultRecupRoot.getString(2),resultRecupRoot.getString(5)); 
-					
-				if(resultRecupRoot = 2) {
-						int isAdmin = resultRecupRoot.getInt(ID_employe);
-							if( ID_employe = isAdmin){
-								Ligue.setAdministrateur(employe);
-								}
-							}
-					resultEmployes.close();
-					selectInstructionEmployes.close();
-					resultLigues.close();
-					instructionLigues.close();
-					
-				}
-	        }
-	        }
-			
-					
+			ResultSet resultRecupRoot = selectInstructionRecupRoot.executeQuery();
 
-				catch (SQLException| SauvegardeImpossible e)
-				{
-					System.out.println(e);
+			// Vérifier si le ROOT statut=2 existe dans la base de données
+			if (resultRecupRoot.next()) {
+				// Comparer le mot de passe récupéré avec celui fourni
+				// Si le mot de passe est correct, ajouter l'employé au gestionnaire du personnel
+				// Ajouter le ROOT avec son ID=getInt1,nom getString2 et son mot de passe getString(5)
+				gestionPersonnel.addRoot(resultRecupRoot.getInt(1), resultRecupRoot.getString(2),resultRecupRoot.getString(5)); 
+
+
+			} else {
+				gestionPersonnel.addRoot("root","toor");
+			}
+
+			//chercher toutes les ligues:
+			String requeteLigues = ("select * from ligue");
+			PreparedStatement selectInstructionLigues = connection.prepareStatement(requeteLigues);		
+			ResultSet resultLigues = selectInstructionLigues.executeQuery();
+			while (resultLigues.next()) {
+				Ligue ligue = gestionPersonnel.addLigue(resultLigues.getInt(1), resultLigues.getString(2));
+				String requeteEmployes = ("select * from employe where ID_ligue =?");
+				PreparedStatement selectInstructionEmployes = connection.prepareStatement(requeteEmployes);
+				//selectInstructionEmployes.setInt(1, ligue.getInt(9));
+				ResultSet resultEmployes = selectInstructionEmployes.executeQuery(requeteEmployes);
+
+				while (resultEmployes.next()){
+					// on sélection l'employé avec l'ID de la ligue = id_ligue ( clé étrangère)
+					//permet de lire dans la BDD les employés de la ligue et récup les employés de cette ligue
+
+
+					Employe employe = ligue.addEmploye(resultEmployes.getInt("ID_employe"),resultEmployes.getString("nom"),resultEmployes.getString("prenom"),resultEmployes.getString("mail"), resultEmployes.getString("password"),LocalDate.parse(resultEmployes.getString("dateArrivee")), LocalDate.parse(resultEmployes.getString("dateDepart")));
+
+					// Vérifier si l'employé est un administrateur
+					if (resultEmployes.getInt("statut") == 1) {
+						ligue.setAdministrateur(employe); // Définir l'employé comme administrateur
+					}
+
 				}
-		return gestionPersonnel;
+				// Fermer les ressources pour les employés de cette ligue
+				resultEmployes.close();
+				selectInstructionEmployes.close();		           
+			}
+
+			// Fermer les ressources pour les ligues
+			resultLigues.close();
+			selectInstructionLigues.close();
+
+	
+	return gestionPersonnel;
+	
+	}
+
+
+		catch (SQLException e)
+		{
+			System.out.println(e);
+			throw new SauvegardeImpossible(e);
+		}
 	}
 
 	@Override
@@ -116,7 +106,7 @@ public class JDBC implements Passerelle
 	{
 		close();
 	}
-	
+
 	public void close() throws SauvegardeImpossible
 	{
 		try
@@ -129,8 +119,8 @@ public class JDBC implements Passerelle
 			throw new SauvegardeImpossible(e);
 		}
 	}
-	
-	
+
+
 	//itération 3:
 	@Override
 	public int insert(Ligue ligue) throws SauvegardeImpossible 
@@ -150,124 +140,124 @@ public class JDBC implements Passerelle
 			exception.printStackTrace();
 			throw new SauvegardeImpossible(exception);
 		}
-		
+
 	}
-		@Override
-		public int insert(Employe employe) throws SauvegardeImpossible 
+	@Override
+	public int insert(Employe employe) throws SauvegardeImpossible 
+	{
+		try 
 		{
-			try 
-			{
-				PreparedStatement instruction;
-				instruction = connection.prepareStatement("insert into employe (nom,statut) values(?,?)", Statement.RETURN_GENERATED_KEYS);
-				instruction.setString(1, employe.getNom());		
-				//root=2 admin =1 user simple=0
-				//root n'a pas de ligue
-				if ( employe.getLigue()== null)
-					instruction.setInt(2,2);
-				else if ( employe.estAdmin(employe.getLigue())) {
-					instruction.setInt(2,1);
-				}
-				else {
-					instruction.setInt(2,0);
-				}
-			
-				
-				instruction.executeUpdate();
-				ResultSet id = instruction.getGeneratedKeys();
-				id.next();
-				return id.getInt(1);
-			} 
-			catch (SQLException exception) 
-			{
-				exception.printStackTrace();
-				throw new SauvegardeImpossible(exception);
-			}		
-		}
-		
-		//rappel procédure de la classe passerelle:
-		@Override
-		public void update(Ligue ligue) throws SauvegardeImpossible 
-		{
-			try 
-			{
-				PreparedStatement instruction;
-				instruction = connection.prepareStatement("update ligue set nom=? where ID_ligue=?");
-				instruction.setString(1, ligue.getNom());
-				instruction.setInt(2, ligue.getId());
-				instruction.executeUpdate();
-				
-			} 
-			catch (SQLException exception) 
-			{
-				exception.printStackTrace();
-				throw new SauvegardeImpossible(exception);
+			PreparedStatement instruction;
+			instruction = connection.prepareStatement("insert into employe (nom,statut) values(?,?)", Statement.RETURN_GENERATED_KEYS);
+			instruction.setString(1, employe.getNom());		
+			//root=2 admin =1 user simple=0
+			//root n'a pas de ligue
+			if ( employe.getLigue()== null)
+				instruction.setInt(2,2);
+			else if ( employe.estAdmin(employe.getLigue())) {
+				instruction.setInt(2,1);
 			}
-			
+			else {
+				instruction.setInt(2,0);
+			}
+
+
+			instruction.executeUpdate();
+			ResultSet id = instruction.getGeneratedKeys();
+			id.next();
+			return id.getInt(1);
+		} 
+		catch (SQLException exception) 
+		{
+			exception.printStackTrace();
+			throw new SauvegardeImpossible(exception);
+		}		
+	}
+
+	//rappel procédure de la classe passerelle:
+	@Override
+	public void update(Ligue ligue) throws SauvegardeImpossible 
+	{
+		try 
+		{
+			PreparedStatement instruction;
+			instruction = connection.prepareStatement("update ligue set nom=? where ID_ligue=?");
+			instruction.setString(1, ligue.getNom());
+			instruction.setInt(2, ligue.getId());
+			instruction.executeUpdate();
+
+		} 
+		catch (SQLException exception) 
+		{
+			exception.printStackTrace();
+			throw new SauvegardeImpossible(exception);
 		}
-		//rappel procédure de la classe passerelle:
-				@Override
-				public void update(Employe employe) throws SauvegardeImpossible 
-				{
-					try 
-					{
-						PreparedStatement instruction;
-						instruction = connection.prepareStatement("update employe set nom=? where ID_employe=?");
-						instruction.setString(1, employe.getNom());
-						instruction.setInt(2, employe.getId());
-						instruction.executeUpdate();
-						
-					} 
-					catch (SQLException exception) 
-					{
-						exception.printStackTrace();
-						throw new SauvegardeImpossible(exception);
-					}
-					
-				}
-				
-				
-				
-				@Override
-				public void remove(Employe employe) throws SauvegardeImpossible 
-				{
-					try 
-					{
-						PreparedStatement instruction;
-						instruction = connection.prepareStatement("delete from employe where ID_employe=?");
-						instruction.setString(1, employe.getNom());
-						instruction.setInt(2, employe.getId());
-						instruction.execute();
-						
-					} 
-					catch (SQLException exception) 
-					{
-						exception.printStackTrace();
-						throw new SauvegardeImpossible(exception);
-					}
-					
-				}
-				@Override
-				public void remove(Ligue ligue) throws SauvegardeImpossible 
-				{
-					try 
-					{
-						PreparedStatement instruction;
-						instruction = connection.prepareStatement("delete from employe where ID_ligue=?");
-						instruction = connection.prepareStatement("delete from ligue where ID_ligue=?");
-						
-						instruction.setString(1, ligue.getNom());
-						instruction.setInt(2, ligue.getId());
-						instruction.execute();
-						
-					} 
-					catch (SQLException exception) 
-					{
-						exception.printStackTrace();
-						throw new SauvegardeImpossible(exception);
-					}
-					
-				}
-	
-	
-	
+
+	}
+	//rappel procédure de la classe passerelle:
+	@Override
+	public void update(Employe employe) throws SauvegardeImpossible 
+	{
+		try 
+		{
+			PreparedStatement instruction;
+			instruction = connection.prepareStatement("update employe set nom=? where ID_employe=?");
+			instruction.setString(1, employe.getNom());
+			instruction.setInt(2, employe.getId());
+			instruction.executeUpdate();
+
+		} 
+		catch (SQLException exception) 
+		{
+			exception.printStackTrace();
+			throw new SauvegardeImpossible(exception);
+		}
+
+	}
+
+
+
+	@Override
+	public void remove(Employe employe) throws SauvegardeImpossible 
+	{
+		try 
+		{
+			PreparedStatement instruction;
+			instruction = connection.prepareStatement("delete from employe where ID_employe=?");
+			instruction.setString(1, employe.getNom());
+			instruction.setInt(2, employe.getId());
+			instruction.execute();
+
+		} 
+		catch (SQLException exception) 
+		{
+			exception.printStackTrace();
+			throw new SauvegardeImpossible(exception);
+		}
+
+	}
+	@Override
+	public void remove(Ligue ligue) throws SauvegardeImpossible 
+	{
+		try 
+		{
+			PreparedStatement instruction;
+			instruction = connection.prepareStatement("delete from employe where ID_ligue=?");
+			instruction = connection.prepareStatement("delete from ligue where ID_ligue=?");
+
+			instruction.setString(1, ligue.getNom());
+			instruction.setInt(2, ligue.getId());
+			instruction.execute();
+
+		} 
+		catch (SQLException exception) 
+		{
+			exception.printStackTrace();
+			throw new SauvegardeImpossible(exception);
+		}
+
+	}
+
+
+
 }
