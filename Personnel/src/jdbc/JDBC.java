@@ -73,7 +73,7 @@ public class JDBC implements Passerelle
 			while (resultEmployes.next()){
 				
 				//pour charger une ligue: id et nom et ajouter chaque ligue à la gestion du personnel
-				Ligue.addEmploye(
+				Employes.addEmploye(
 						
 						resultEmployes.getString(2), //nom
 						resultEmployes.getString(3), //prenom
