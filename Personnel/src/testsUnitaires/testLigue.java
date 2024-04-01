@@ -11,7 +11,9 @@ import personnel.*;
 class testLigue 
 {
 	GestionPersonnel gestionPersonnel = GestionPersonnel.getGestionPersonnel();
-	
+	public testLigue() throws SauvegardeImpossible {
+		
+	}
 	
 
 	// test ADD EMPLOYE
