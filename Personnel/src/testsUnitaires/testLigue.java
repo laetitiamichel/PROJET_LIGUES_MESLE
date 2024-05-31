@@ -4,24 +4,37 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
 
+import org.junit.jupiter.api.BeforeEach;
+//import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
 import personnel.*;
 
 class testLigue 
 {
-	GestionPersonnel gestionPersonnel = GestionPersonnel.getGestionPersonnel();
-	
-	
+	GestionPersonnel gestionPersonnel;
+	Ligue ligue;
+	Employe employe;
 
-	// test ADD EMPLOYE
+	@BeforeEach
+	void setUp() {
+		//System.out.println("setUp");
+
+		try {
+			//variable d'instance:
+			gestionPersonnel = GestionPersonnel.getGestionPersonnel();
+			ligue = gestionPersonnel.addLigue("Fléchettes");
+			employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty", LocalDate.of(2020, 5, 13),LocalDate.of(2024, 5, 13)); 
+		} catch (SauvegardeImpossible e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	// test ADD EMPLOYE avec JUNIT
 	@Test
 	void addEmploye() throws SauvegardeImpossible
 	{
-		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
-
-		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty", null, null); 
-
+		//System.out.println("addE");
 		assertEquals(employe, ligue.getEmployes().first());
 	}
 	
@@ -31,18 +44,15 @@ class testLigue
 	public void setEmploye() throws SauvegardeImpossible
 	{
 		
-		Ligue ligue = gestionPersonnel.addLigue(-1,"Fléchettes"); // création d'une ligue
-		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty", null, null); // création employé
 		employe.setNom("Franck"); // changement de nom avec méthode set
-		assertEquals("Franck", ligue.getNom()); // vérif si le nom est changé
+		assertEquals("Franck", employe.getNom()); // vérif si le nom est changé
 	}
 	
 	// TEST SUPRESSION EMPLOYE
 	@Test
 	public void removeEmploye() throws SauvegardeImpossible 
 	{
-		Ligue ligue = gestionPersonnel.addLigue("Fléchettes"); // création ligue
-		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty", null, null); // création employé
+		
 		employe.remove(); // supprime employé de la ligue
 		ligue.getEmployes().isEmpty();//retourne vrai si employe supprimé
 		assertTrue(ligue.getEmployes().isEmpty());// si méthode isempty est vrai donc test ok
@@ -53,7 +63,7 @@ class testLigue
 		@Test
 		void createLigue() throws SauvegardeImpossible
 		{
-			Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
+			
 			assertEquals("Fléchettes", ligue.getNom());
 		}
 		
@@ -61,8 +71,7 @@ class testLigue
 	@Test 
 	 public void getLigues() throws SauvegardeImpossible 
 	 {
-
-		 	Ligue ligue = gestionPersonnel.addLigue("Fléchettes");// création d'une ligue        
+ 
 	        // Appeler le getter et vérifier si la valeur renvoyée est correcte
 	        assertTrue(gestionPersonnel.getLigues().contains(ligue));	//retourne vrai si ligue est récupérée   
 	        }
@@ -71,7 +80,6 @@ class testLigue
 	@Test
 	public void setLigue() throws SauvegardeImpossible {
 		
-		Ligue ligue = gestionPersonnel.addLigue(-1,"Fléchettes"); // création d'une ligue
 		ligue.setNom("Petanque"); // changement de nom avec méthode set
 		assertEquals("Petanque", ligue.getNom()); // vérif si le nom est changé
 	}
@@ -80,14 +88,9 @@ class testLigue
 	// TEST SUPPRESSION LIGUE
 	@Test
 	public void removeLigues() throws SauvegardeImpossible 
-	{
-		Ligue ligue = gestionPersonnel.addLigue(-1,"Fléchettes");
+	{	
 		ligue.remove(); // supression ligue
-		ligue.setNom("Fléchettes");
-		ligue.getNom().isEmpty(); // retourne VRAI si ligue est supprimée
-		assertTrue(ligue.getNom().isEmpty()); // vérif si la ligue est vide
-		
-		
+		assertFalse(gestionPersonnel.getLigues().contains(ligue)); // vérif si la ligue est vide	
 	}
 	
 	
@@ -95,7 +98,7 @@ class testLigue
 	@Test
 	public void estAdmin() throws SauvegardeImpossible 
 	{
-		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
+		
 		Employe Michel = ligue.addEmploye("Michel", "L", null, null, null,null);
 		Employe tyty = ligue.addEmploye("tyty", "L", null, null, null,null);
 		ligue.setAdministrateur(Michel);
@@ -113,12 +116,11 @@ class testLigue
 	// TEST SUPPRESSION ADMIN
 	@Test
 	public void removeAdmin() throws SauvegardeImpossible {
-		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
+		
 		Employe employe = ligue.addEmploye("Michel", "L", null, null, null,null);
-		employe.estAdmin(ligue);
+		ligue.setAdministrateur(employe);
 		ligue.getAdministrateur().remove();
-
-		assertEquals(ligue.getAdministrateur(), gestionPersonnel.getRoot()); // vérif si la ligue est vide
+		assertTrue(gestionPersonnel.getRoot().estAdmin(ligue)); // vérif si la ligue est vide
 	}
 	
 	
@@ -126,20 +128,24 @@ class testLigue
 	 @Test 
 	 public void getNom() throws SauvegardeImpossible 
 	 {
-			Ligue ligue = gestionPersonnel.addLigue("Fléchettes");// création d'une ligue
-
-	        // Créer une instance de la classe à tester
-		 	Employe employe = ligue.addEmploye("Michel", "L", null, null, null,null);
 
 	        // Appeler le getter et vérifier si la valeur renvoyée est correcte
-	        assertEquals("Michel", employe.getNom());
+	        assertEquals("Bouchard", employe.getNom());
+	   }
+	 //test SET NOM
+	 @Test 
+	 public void setNom() throws SauvegardeImpossible 
+	 {
+		 	//changement du prenom:
+		 	employe.setNom("testNom");
+	        // Appeler le getter et vérifier si la valeur renvoyée est correcte
+	        assertEquals("testNom", employe.getNom());
 	   }
 	 
 	 //TEST GET PRENOM
 	 @Test 
 	 public void getPrenom() throws SauvegardeImpossible 
 	 {
-		 	Ligue ligue = gestionPersonnel.addLigue("Fléchettes");// création d'une ligue   
 		 	
 		 	// Créer une instance de la classe à tester
 		 	Employe employe = ligue.addEmploye("Michel","Laetitia", null, null, null,null);
@@ -147,45 +153,90 @@ class testLigue
 	        // Appeler le getter et vérifier si la valeur renvoyée est correcte
 	        assertEquals("Laetitia", employe.getPrenom());
 	   }
+	 //test SET PRENOM
+	 @Test 
+	 public void setPrenom() throws SauvegardeImpossible 
+	 {
+		 	//changement du prenom:
+		 	employe.setPrenom("test");
+	        // Appeler le getter et vérifier si la valeur renvoyée est correcte
+	        assertEquals("test", employe.getPrenom());
+	   }
+	 
+	 //TEST GET checkPassword
+	 @Test
+	 public void  checkPassword() throws SauvegardeImpossible 
+	 {
+	        // Appeler le getter et vérifier si la valeur renvoyée est correcte
+	        assertTrue(employe.checkPassword("azerty"));
+	   }
+	 //TEST SET checkPassword
+	 @Test
+	 public void  setPassword() throws SauvegardeImpossible 
+	 {
+		 	employe.setPassword("testPassword");
+	        // Appeler le getter et vérifier si la valeur renvoyée est correcte
+	        assertTrue(employe.checkPassword("testPassword"));
+	  }
 	 
 	 //TEST GET MAIL
 	 @Test 
 	 public void getMail() throws SauvegardeImpossible 
 	 {
-
-		 	Ligue ligue = gestionPersonnel.addLigue("Fléchettes");// création d'une ligue   
-		 	
-		 	// Créer une instance de la classe à tester
-		 	Employe employe = ligue.addEmploye(null, null, "lm@gmail.com", null, null,null);
-	       
 	        // Appeler le getter et vérifier si la valeur renvoyée est correcte
-	        assertEquals("lm@gmail.com", employe.getMail());
+	        assertEquals("g.bouchard@gmail.com", employe.getMail());
 	   }
+	 
+	 //test SET MAIL
+	 @Test 
+	 public void setMail() throws SauvegardeImpossible 
+	 {
+		 	//changement de l'email:
+		 	employe.setMail("test@gmail.com");
+	        // Appeler le getter et vérifier si la valeur renvoyée est correcte
+	        assertEquals("test@gmail.com", employe.getMail());
+	   }
+ 
+	 // test GET DATEARRIVEE
+	 @Test 
+	 public void getDateArrivee() throws SauvegardeImpossible 
+	 {
+	        // Appeler le getter et vérifier si la valeur renvoyée est correcte
+	        assertEquals(LocalDate.of(2020, 5, 13), employe.getDateArrivee());
+	   }
+	 
+	 // test SET DATEARRIVEE
+	 @Test 
+	 public void setDateArrivee() throws SauvegardeImpossible 
+	 {
+		 //changement date arrivee:
+		employe.setDateArrivee(LocalDate.of(2020, 6, 17));
+		assertEquals(LocalDate.of(2020, 6, 17), employe.getDateArrivee());
+		assertThrows(IllegalArgumentException.class, () -> {
+			employe.setDateArrivee(LocalDate.of(2025, 6, 17));
+		 });
+		
+	 }
 	 
 	 // TEST GET DATE DEPART
 	 @Test 
 	 public void getDateDepart() throws SauvegardeImpossible 
 	 {
-		 	Ligue ligue = gestionPersonnel.addLigue("Fléchettes");// création d'une ligue   
-		 	LocalDate DateDepart = LocalDate.parse("1/01/2001");
-		 	// Créer une instance de la classe à tester
-		 	Employe employe = ligue.addEmploye(null, null,null, null, null,DateDepart);
-		 	
 	        // Appeler le getter et vérifier si la valeur renvoyée est correcte
-	        assertEquals("1/01/2001", employe.getDateDepart());
+	        assertEquals(LocalDate.of(2024, 5, 13), employe.getDateDepart());
 	   }
 	 
-	 // test GET DATEARRIVEE
+	 // test SET DATEDEPART
 	 @Test 
-	 public void getDateArrivee() throws SauvegardeImpossible 
+	 public void setDateDepart() throws SauvegardeImpossible 
 	 {
-		 Ligue ligue = gestionPersonnel.addLigue("Fléchettes");// création d'une ligue   
-		 	LocalDate dateArrivee = LocalDate.parse("1/01/2001");
-		 	// Créer une instance de la classe à tester
-		 	Employe employe = ligue.addEmploye(null, null,null, null,dateArrivee, null);
-		 	
-	        // Appeler le getter et vérifier si la valeur renvoyée est correcte
-	        assertEquals("1/01/2001", employe.getDateArrivee());
-	   }
+		 //changement date Depart:
+			employe.setDateDepart(LocalDate.of(2025, 6, 17));
+			assertEquals(LocalDate.of(2025, 6, 17), employe.getDateDepart());
+			assertThrows(IllegalArgumentException.class, () -> {
+				//ici la date de départ est inférieure à la date d'arrivée:
+				employe.setDateDepart(LocalDate.of(2017, 6, 17));
+			 });
+	 }
 	
 }

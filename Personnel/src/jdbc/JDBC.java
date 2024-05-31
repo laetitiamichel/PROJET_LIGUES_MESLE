@@ -63,8 +63,8 @@ public class JDBC implements Passerelle
 				Ligue ligue = gestionPersonnel.addLigue(resultLigues.getInt(1), resultLigues.getString(2));
 				String requeteEmployes = ("select * from employe where ID_ligue =?");
 				PreparedStatement selectInstructionEmployes = connection.prepareStatement(requeteEmployes);
-				//selectInstructionEmployes.setInt(1, ligue.getInt(9));
-				ResultSet resultEmployes = selectInstructionEmployes.executeQuery(requeteEmployes);
+				selectInstructionEmployes.setInt(1, ligue.getId());
+				ResultSet resultEmployes = selectInstructionEmployes.executeQuery();
 
 				while (resultEmployes.next()){
 					// on sélection l'employé avec l'ID de la ligue = id_ligue ( clé étrangère)
@@ -160,8 +160,6 @@ public class JDBC implements Passerelle
 			else {
 				instruction.setInt(2,0);
 			}
-
-
 			instruction.executeUpdate();
 			ResultSet id = instruction.getGeneratedKeys();
 			id.next();
@@ -181,7 +179,7 @@ public class JDBC implements Passerelle
 		try 
 		{
 			PreparedStatement instruction;
-			instruction = connection.prepareStatement("update ligue set nom=? where ID_ligue=?");
+			instruction = connection.prepareStatement("update ligue set nomLigue=? where ID_ligue=?");
 			instruction.setString(1, ligue.getNom());
 			instruction.setInt(2, ligue.getId());
 			instruction.executeUpdate();
@@ -201,9 +199,19 @@ public class JDBC implements Passerelle
 		try 
 		{
 			PreparedStatement instruction;
-			instruction = connection.prepareStatement("update employe set nom=? where ID_employe=?");
+			instruction = connection.prepareStatement("update employe set nom=?,statut=? where ID_employe=?");
 			instruction.setString(1, employe.getNom());
-			instruction.setInt(2, employe.getId());
+			instruction.setInt(3, employe.getId());
+				//on récup la ligue de l'employé et on vérif si il est admin de sa ligue
+				// Définir l'employé comme administrateur=> retourne un booleen
+				if(employe.estAdmin(employe.getLigue())==true){
+					instruction.setInt(2,1); //1=admin de sa ligue=> update bDD	
+				}
+				else {
+					instruction.setInt(2,0);//0=employe simple de sa ligue=> update BDD	= écrite BDD
+				}
+			//rajouter le statut i=si set admin = alors admin
+			//si employer admin=1 => statut =1
 			instruction.executeUpdate();
 
 		} 

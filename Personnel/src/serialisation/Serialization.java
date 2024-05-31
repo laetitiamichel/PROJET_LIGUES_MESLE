@@ -71,11 +71,11 @@ public class Serialization implements personnel.Passerelle
 		
 	}
 
-	@Override
-	public void updateStatut(Employe employe) throws SauvegardeImpossible {
+	//@Override
+	//public void updateStatut(Employe employe) throws SauvegardeImpossible {
 		// TODO Auto-generated method stub
 		
-	}
+	//}
 
 	@Override
 	public void remove(Employe employe) throws SauvegardeImpossible {

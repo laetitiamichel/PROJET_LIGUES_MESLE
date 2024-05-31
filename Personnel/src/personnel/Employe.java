@@ -161,6 +161,7 @@ public class Employe implements Serializable, Comparable<Employe>
 	
 	public boolean checkPassword(String password)
 	{
+		//System.out.println(this.password); si besoin de craquer le mdp et de l'afficher en ligne de commande
 		return this.password.equals(password);
 	}
 
@@ -203,7 +204,7 @@ public class Employe implements Serializable, Comparable<Employe>
         }
  
 		this.dateArrivee = dateArrivee;
-		gestionPersonnel.update(this);
+		gestionPersonnel.update(this);//this de type employe
 	}
 
 
@@ -261,6 +262,7 @@ public class Employe implements Serializable, Comparable<Employe>
 			throw new ImpossibleDeSupprimerRoot();
 	}
 
+	//employe classe par ordre alphabetique:
 	@Override
 	public int compareTo(Employe autre)
 	{
