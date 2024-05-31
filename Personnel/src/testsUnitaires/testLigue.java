@@ -12,17 +12,10 @@ import personnel.*;
 
 class testLigue 
 {
-<<<<<<< HEAD
+
 	GestionPersonnel gestionPersonnel;
 	Ligue ligue;
 	Employe employe;
-=======
-	GestionPersonnel gestionPersonnel = GestionPersonnel.getGestionPersonnel();
-	public testLigue() throws SauvegardeImpossible {
-		
-	}
-	
->>>>>>> 0bfa2e4975ae66316387016abd5894bd0e04b9c2
 
 	@BeforeEach
 	void setUp() {
