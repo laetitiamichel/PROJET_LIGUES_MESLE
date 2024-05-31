@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.sql.Date;
 
 import personnel.*;
 
@@ -148,17 +149,22 @@ public class JDBC implements Passerelle
 		try 
 		{
 			PreparedStatement instruction;
-			instruction = connection.prepareStatement("insert into employe (nom,statut) values(?,?)", Statement.RETURN_GENERATED_KEYS);
-			instruction.setString(1, employe.getNom());		
+			instruction = connection.prepareStatement("insert into employe (nom,prenom,mail,password,dateArrivee,dateDepart,statut) values(?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+			instruction.setString(1, employe.getNom());
+			instruction.setString(2, employe.getPrenom());
+			instruction.setString(3, employe.getMail());
+			instruction.setInt(4, employe.hashCode());
+			instruction.setDate(5, Date.valueOf(employe.getDateArrivee()));
+			instruction.setDate(6, Date.valueOf(employe.getDateArrivee()));
 			//root=2 admin =1 user simple=0
 			//root n'a pas de ligue
 			if ( employe.getLigue()== null)
-				instruction.setInt(2,2);
+				instruction.setInt(7,2);
 			else if ( employe.estAdmin(employe.getLigue())) {
-				instruction.setInt(2,1);
+				instruction.setInt(7,1);
 			}
 			else {
-				instruction.setInt(2,0);
+				instruction.setInt(7,0);
 			}
 			instruction.executeUpdate();
 			ResultSet id = instruction.getGeneratedKeys();

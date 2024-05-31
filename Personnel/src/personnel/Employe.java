@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.TreeSet;
+import java.util.Objects;
 
 /**
  * Employé d'une ligue hébergée par la M2L. Certains peuvent 
@@ -165,6 +166,14 @@ public class Employe implements Serializable, Comparable<Employe>
 		return this.password.equals(password);
 	}
 
+
+	//HASH PASSWORD:
+	@Override
+	   public int hashCode()
+	{
+		return password.hashCode();
+	}
+	
 	/**
 	 * Change le password de l'employé.
 	 * @param password le nouveau password de l'employé. 
