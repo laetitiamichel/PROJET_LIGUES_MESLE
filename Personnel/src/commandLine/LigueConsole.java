@@ -31,20 +31,12 @@ public class LigueConsole
 		return menu;
 	}
 	// AFFICHER LIGUES
-	private Option afficherLigues()
+	private List<Ligue> afficherLigues()
 	{
-		return new Option("Afficher les ligues", "l", () -> {System.out.println(gestionPersonnel.getLigues());});
-	}
-
-	private Option afficher(final Ligue ligue)
-	{
-		return new Option("Afficher la ligue", "l", 
-				() -> 
-				{
-					System.out.println(ligue);
-					System.out.println("administrée par " + ligue.getAdministrateur());
-				}
-		);
+		return new  List<Ligue>("Afficher les ligues", "l", 
+				() -> new ArrayList<>(gestionPersonnel.getLigues()),
+				(element) -> selectionnerLigue()
+				);
 	}
 	
 	
@@ -76,7 +68,7 @@ public class LigueConsole
 	private Menu editerLigue(Ligue ligue)
 	{
 		Menu menu = new Menu("Editer " + ligue.getNom());
-		menu.add(afficher(ligue));
+		menu.add(afficherLigues());
 		menu.add(gererEmployes(ligue));
 		menu.add(changerNom(ligue));
 		menu.add(supprimer(ligue));
