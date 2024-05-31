@@ -31,13 +31,22 @@ public class LigueConsole
 		return menu;
 	}
 	// AFFICHER LIGUES
-	private List<Ligue> afficherLigues()
-	{
-		return new  List<Ligue>("Afficher les ligues", "l", 
-				() -> new ArrayList<>(gestionPersonnel.getLigues()),
-				(element) -> selectionnerLigue()
-				);
-	}
+	 private Option afficherLigues()
+	    {
+	        return new Option("Afficher les ligues", "l", () -> {System.out.println(gestionPersonnel.getLigues());});
+	    }
+
+	    private Option afficher(final Ligue ligue)
+	    {
+	        return new Option("Afficher la ligue", "l", 
+	                () -> 
+	                {
+	                    System.out.println(ligue);
+	                    System.out.println("administrée par " + ligue.getAdministrateur());
+	                }
+	        );
+	    }
+
 	
 	
 
