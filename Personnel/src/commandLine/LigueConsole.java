@@ -120,7 +120,7 @@ public class LigueConsole
 	//SELECTIONNER UN EMPLOYE
 	private List<Employe> selectionnerEmploye(final Ligue ligue)
 	{
-		return new List<>("Sélectionner un employé", "f", 
+		return new List<Employe>("Sélectionner un employé", "f", 
 				() -> new ArrayList<>(ligue.getEmployes()),
 				//affiche le sous menu - sélection un employé de la ligue pré sélectionnée
 				(employe) -> employeConsole.editerEmploye(ligue,employe)
@@ -128,6 +128,7 @@ public class LigueConsole
 				);
 	}
     //AFFICHER EMPLOYE SELECTIONNE	
+
 	private Option afficherEmployes(final Ligue ligue)
 	{
 		return new Option("Afficher les employes", "l", () -> {System.out.println(ligue.getEmployes());});

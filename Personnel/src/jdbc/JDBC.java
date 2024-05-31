@@ -205,9 +205,13 @@ public class JDBC implements Passerelle
 		try 
 		{
 			PreparedStatement instruction;
-			instruction = connection.prepareStatement("update employe set nom=?,statut=? where ID_employe=?");
+			instruction = connection.prepareStatement("update employe set nom=?,prenom=?,mail=?,password=?,dateArrivee=?,dateDepart=?,statut=? where ID_employe=?");
 			instruction.setString(1, employe.getNom());
-			instruction.setInt(3, employe.getId());
+			instruction.setString(2, employe.getPrenom());
+			instruction.setString(3, employe.getMail());
+			instruction.setInt(4, employe.hashCode());
+			instruction.setDate(5, Date.valueOf(employe.getDateArrivee()));
+			instruction.setDate(6, Date.valueOf(employe.getDateDepart()));
 				//on récup la ligue de l'employé et on vérif si il est admin de sa ligue
 				// Définir l'employé comme administrateur=> retourne un booleen
 				if(employe.estAdmin(employe.getLigue())==true){
@@ -217,7 +221,7 @@ public class JDBC implements Passerelle
 					instruction.setInt(2,0);//0=employe simple de sa ligue=> update BDD	= écrite BDD
 				}
 			//rajouter le statut i=si set admin = alors admin
-			//si employer admin=1 => statut =1
+			//si employe admin=1 => statut =1
 			instruction.executeUpdate();
 
 		} 
