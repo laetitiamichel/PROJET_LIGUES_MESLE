@@ -233,7 +233,13 @@ public class Employe implements Serializable, Comparable<Employe>
     	        if (dateArrivee != null && dateDepart != null && dateDepart.isBefore(dateArrivee)) {
     	            throw new IllegalArgumentException("La date de départ ne peut pas être antérieure à la date d'arrivée.");
     	        }
-    	        this.dateDepart = dateDepart;
+    	     // Mettre à jour la date de départ uniquement si elle n'est pas nulle
+    	        if (dateDepart != null) {
+    	            this.dateDepart = dateDepart;
+    	        } else {
+    	            this.dateDepart = null;
+    	            System.out.println("test");
+    	        }
     	        gestionPersonnel.update(this);
       
     	    }

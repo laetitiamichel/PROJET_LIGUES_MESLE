@@ -3,6 +3,8 @@ package commandLine;
 import static commandLineMenus.rendering.examples.util.InOut.getString;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import commandLineMenus.List;
@@ -95,10 +97,20 @@ public class EmployeConsole
 			}
 		
 		
-		LocalDate getDate(String message)
+		LocalDate getDate(String prompt)
 		{
-		
-			return LocalDate.parse(getString(message));
+			String dateStr = getString(prompt);
+			if (dateStr.isEmpty()){
+				return null;
+			}else {
+				try {
+					return LocalDate.parse(dateStr, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+					}catch (DateTimeParseException e) {
+						System.out.println("format de date invalide");
+						return getDate(prompt);
+					}
+			}
+			
 		}
 	
 		//AJOUTER UNE DATE ARRIVEE DE L'EMPLOYE:

@@ -33,7 +33,8 @@ public class LigueConsole
 	// AFFICHER LIGUES
 	 private Option afficherLigues()
 	    {
-	        return new Option("Afficher les ligues", "l", () -> {System.out.println(gestionPersonnel.getLigues());});
+	        return new Option("Afficher les ligues", "l", 
+	        		() -> {System.out.println(gestionPersonnel.getLigues());});
 	    }
 
 	    private Option afficher(final Ligue ligue)

@@ -155,7 +155,7 @@ public class JDBC implements Passerelle
 			instruction.setString(3, employe.getMail());
 			instruction.setInt(4, employe.hashCode());
 			instruction.setDate(5, Date.valueOf(employe.getDateArrivee()));
-			instruction.setDate(6, Date.valueOf(employe.getDateArrivee()));
+			instruction.setDate(6, Date.valueOf(employe.getDateDepart()));
 			//root=2 admin =1 user simple=0
 			//root n'a pas de ligue
 			if ( employe.getLigue()== null)
