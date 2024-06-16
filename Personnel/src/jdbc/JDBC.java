@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.sql.Date;
+import java.util.HashMap;
 
 import personnel.*;
 
@@ -153,9 +154,11 @@ public class JDBC implements Passerelle
 			instruction.setString(1, employe.getNom());
 			instruction.setString(2, employe.getPrenom());
 			instruction.setString(3, employe.getMail());
-			instruction.setInt(4, employe.hashCode());
-			instruction.setDate(5, Date.valueOf(employe.getDateArrivee()));
-			instruction.setDate(6, Date.valueOf(employe.getDateDepart()));
+			instruction.setString(4, employe.getPassword());
+			//instruction.setDate(5, Date.valueOf(employe.getDateArrivee()));
+			//instruction.setDate(6, Date.valueOf(employe.getDateDepart()));
+			instruction.setDate(5, Date.valueOf(LocalDate.now()));
+			instruction.setDate(6, Date.valueOf(LocalDate.now()));
 			//root=2 admin =1 user simple=0
 			//root n'a pas de ligue
 			if ( employe.getLigue()== null)

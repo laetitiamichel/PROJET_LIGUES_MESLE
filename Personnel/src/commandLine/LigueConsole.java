@@ -148,8 +148,8 @@ public class LigueConsole
 							getString("prenom : "), 
 							getString("mail : "), 
 							getString("password : "), 
-							employeConsole.getDate("Date d'arrivée (format : YYYY-MM-DD) : "),
-							employeConsole.getDate("Date de départ (format : YYYY-MM-DD) : ")
+							employeConsole.getDate("Date d'arrivée (format : dd-MM-yyyy) : "),
+							employeConsole.getDate("Date de départ (format : dd-MM-yyyy) : ")
 							);
 					} catch (SauvegardeImpossible e) {
 						// TODO Auto-generated catch block

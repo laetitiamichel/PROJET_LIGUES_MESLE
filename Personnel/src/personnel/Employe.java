@@ -3,6 +3,7 @@ package personnel;
 import java.io.Serializable;
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.TreeSet;
 import java.util.Objects;
 
@@ -166,13 +167,13 @@ public class Employe implements Serializable, Comparable<Employe>
 		return this.password.equals(password);
 	}
 
-
+	
 	//HASH PASSWORD:
-	@Override
-	   public int hashCode()
-	{
-		return password.hashCode();
-	}
+	//@Override
+	   //public string hashCode()
+	//{
+		//return password.hashCode();
+	//}
 	
 	/**
 	 * Change le password de l'employé.
@@ -181,9 +182,22 @@ public class Employe implements Serializable, Comparable<Employe>
 	
 	public void setPassword(String password)throws SauvegardeImpossible
 	{
-		this.password= password;
-		gestionPersonnel.update(this);
+		
+			this.password= password;
+			try {
+				gestionPersonnel.update(this);
+			} catch (SauvegardeImpossible e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	}
+	
+	//GET PASSWORD
+	public String getPassword()
+	{
+		return password;
+	}
+
 
 	/**
 	 * Retourne la ligue à laquelle l'employé est affecté.
@@ -227,19 +241,13 @@ public class Employe implements Serializable, Comparable<Employe>
       
      /* modifie la date de départ de l'employé dans la ligue */
       
-      public void setDateDepart(LocalDate dateDepart)throws SauvegardeImpossible 
+      public void setDateDepart(LocalDate dateDepart)throws SauvegardeImpossible, DateTimeParseException
       {
     	        // Valider la date si nécessaire
     	        if (dateArrivee != null && dateDepart != null && dateDepart.isBefore(dateArrivee)) {
     	            throw new IllegalArgumentException("La date de départ ne peut pas être antérieure à la date d'arrivée.");
     	        }
-    	     // Mettre à jour la date de départ uniquement si elle n'est pas nulle
-    	        if (dateDepart != null) {
-    	            this.dateDepart = dateDepart;
-    	        } else {
-    	            this.dateDepart = null;
-    	            System.out.println("test");
-    	        }
+    	        this.dateDepart = dateDepart;
     	        gestionPersonnel.update(this);
       
     	    }

@@ -14,6 +14,7 @@ import commandLineMenus.Option;
 import personnel.Employe;
 import personnel.Ligue;
 import personnel.SauvegardeImpossible;
+import java.util.Scanner;
 
 public class EmployeConsole 
 {
@@ -99,17 +100,23 @@ public class EmployeConsole
 		
 		LocalDate getDate(String prompt)
 		{
-			String dateStr = getString(prompt);
-			if (dateStr.isEmpty()){
-				return null;
-			}else {
-				try {
-					return LocalDate.parse(dateStr, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-					}catch (DateTimeParseException e) {
-						System.out.println("format de date invalide");
-						return getDate(prompt);
-					}
-			}
+			//return LocalDate.parse(getString(message));
+			LocalDate date = null;
+		    boolean validDate = false;
+		    Scanner scanner = new Scanner(System.in);
+		    do {
+		        try {
+		            System.out.print(prompt);
+		            String dateString = scanner.nextLine();
+		            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		            date = LocalDate.parse(dateString, formatter);
+		            validDate = true;
+		        } catch (DateTimeParseException | IllegalArgumentException e) {
+		            System.err.println("La date n'est pas au bon format ou La date d'arrivée ne peut pas être après la date de départ . "
+		            		+ "Veuillez réessayer sous le format suivant jj-mm-aaaa ou modifier la date.");   
+		        }
+		    } while (!validDate);
+		    return date;
 			
 		}
 	
